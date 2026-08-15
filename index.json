@@ -29,12 +29,38 @@
             "nadena.dev.modular-avatar": ">=1.10.0",
             "nadena.dev.ndmf": ">=1.4.0"
           },
+          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.0/com.hinzka.nkinstaller-1.0.0.zip",
+          "zipSHA256": "REPLACE_WITH_ACTUAL_SHA256"
+        },
+        "1.0.1": {
+          "name": "com.hinzka.nkinstaller",
+          "displayName": "NK Installer - Native Shape Key ARKit FaceTracking Installer",
+          "version": "1.0.1",
+          "unity": "2022.3",
+          "description": "アバター作者がつくった表情で、そのままフェイストラッキング。ARKit標準シェイプキーを非破壊で活用するVRCFaceTracking導入ツールです。",
+          "author": {
+            "name": "hinzka",
+            "url": "https://twitter.com/hinzka"
+          },
+          "license": "LicenseRef-Proprietary",
+          "keywords": [
+            "vrchat",
+            "facetracking",
+            "vrcft",
+            "arkit",
+            "modular-avatar"
+          ],
+          "vpmDependencies": {
+            "com.vrchat.avatars": ">=3.7.0",
+            "nadena.dev.modular-avatar": ">=1.10.0",
+            "nadena.dev.ndmf": ">=1.4.0"
+          },
           "legacyFolders": {},
           "legacyFiles": {},
           "changelogUrl": "https://example.com/nk-installer/CHANGELOG.md",
           "documentationUrl": "https://example.com/nk-installer/docs",
-          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.0/com.hinzka.nkinstaller-1.0.0.zip",
-          "zipSHA256": "8b36fa44f20e7fc981ca340a2bdc8146ca27df0525a1c4da30adf04e6d12040a"
+          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.1/com.hinzka.nkinstaller-1.0.1.zip",
+          "zipSHA256": "46b836a4742bac14d3f448ad00d35da9dfa5c350f50083e9bba0db16c4022766"
         }
       }
     }
