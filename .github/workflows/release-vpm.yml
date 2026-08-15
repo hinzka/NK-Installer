@@ -1,18 +1,20 @@
 # NK Installer VPMパッケージ自動リリース用ワークフロー
 #
 # 【使い方】
-#   1. リポジトリ内に vX.Y.Z 形式のタグ(例: v1.0.1)をプッシュすると自動的に起動します。
-#      package.json の "version" フィールドと、タグの数字部分は必ず一致させてください
-#      (例: package.json が "version": "1.0.1" なら、タグは v1.0.1)。
-#   2. パッケージフォルダ(com.hinzka.nkinstaller/)をzip化し、
-#      GitHub Releaseとして公開します(zipファイルが添付されます)。
-#   3. index.json (VPMリポジトリ一覧)を最新の内容に自動更新し、
-#      gh-pagesブランチへ反映します(GitHub Pagesで配信されます)。
+#   1. リポジトリ内に vX.Y.Z 形式のタグ（例: v1.0.6）をプッシュすると自動的に起動します。
+#      package.json の "version" フィールドと、タグの数字部分は必ず一致させてください。
+#
+#   2. パッケージフォルダ（com.hinzka.nkinstaller/）の中身をzip化し、
+#      GitHub Releaseとして公開します。
+#
+#   3. index.json（VPMリポジトリ一覧）を最新の内容に更新します。
+#
+#   4. index.json と、Add to VCC ボタンのある index.html を
+#      gh-pages ブランチへ公開します。
 #
 # 【事前準備】
-#   - リポジトリの Settings > Pages で、Source を "gh-pages branch" に設定してください
-#     (初回はワークフロー実行後に gh-pages ブランチが自動生成されるので、その後で設定します)。
-#   - リポジトリの Settings > Actions > General > Workflow permissions で、
+#   - Settings > Pages で、Source を gh-pages branch に設定してください。
+#   - Settings > Actions > General > Workflow permissions で、
 #     "Read and write permissions" を有効にしてください。
 
 name: Release VPM Package
@@ -22,7 +24,6 @@ on:
     tags:
       - "v*.*.*"
 
-# パッケージフォルダ名とindex.jsonのパスは、実際のリポジトリ構成に合わせて書き換えてください。
 env:
   PACKAGE_NAME: com.hinzka.nkinstaller
   PACKAGE_DIR: com.hinzka.nkinstaller
@@ -31,8 +32,10 @@ env:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
@@ -42,12 +45,14 @@ jobs:
         run: |
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           VERSION="${TAG_NAME#v}"
+
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG_NAME" >> "$GITHUB_OUTPUT"
 
       - name: package.jsonのバージョンとタグが一致しているか確認
         run: |
-          PKG_VERSION=$(python3 -c "import json;print(json.load(open('${PACKAGE_DIR}/package.json'))['version'])")
+          PKG_VERSION=$(python3 -c "import json; print(json.load(open('${PACKAGE_DIR}/package.json'))['version'])")
+
           if [ "$PKG_VERSION" != "${{ steps.version.outputs.version }}" ]; then
             echo "::error::package.json のバージョン($PKG_VERSION)とタグ(${{ steps.version.outputs.tag }})が一致していません。"
             exit 1
@@ -56,13 +61,13 @@ jobs:
       - name: パッケージzipを作成
         run: |
           ZIP_NAME="${PACKAGE_NAME}-${{ steps.version.outputs.version }}.zip"
-          # 【重要】VRChat公式テンプレートと同じ方式: パッケージフォルダの"中"へ移動してから
-          # "."(カレントディレクトリの中身)をzip化する。これにより package.json がzipの
-          # ルート直下に来る(以前は1階層余分にネストしており、VCC側でパッケージの
-          # マニフェストを認識できず、Package Managerがハングする不具合があった)。
+
+          # package.json がZIPのルート直下に来るよう、
+          # パッケージフォルダの中へ移動してからZIP化する
           cd "$PACKAGE_DIR"
           zip -r "$GITHUB_WORKSPACE/$ZIP_NAME" .
           cd "$GITHUB_WORKSPACE"
+
           echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
 
       - name: zipのSHA256を計算
@@ -82,22 +87,32 @@ jobs:
       - name: index.jsonへ新バージョンを追記
         run: |
           python3 << 'PYEOF'
-          import json, os
+          import json
+          import os
 
           pkg_dir = os.environ["PACKAGE_DIR"]
           version = "${{ steps.version.outputs.version }}"
           zip_name = os.environ["ZIP_NAME"]
           sha256 = "${{ steps.hash.outputs.sha256 }}"
-          repo = os.environ["GITHUB_REPOSITORY"]  # 例: hinzka/NK-Installer
+          repo = os.environ["GITHUB_REPOSITORY"]
           tag = "${{ steps.version.outputs.tag }}"
 
+          # package.json を読み込む
           with open(f"{pkg_dir}/package.json", encoding="utf-8") as f:
               pkg = json.load(f)
 
-          pkg["url"] = f"https://github.com/{repo}/releases/download/{tag}/{zip_name}"
+          # Release ZIP URL
+          pkg["url"] = (
+              f"https://github.com/{repo}/releases/download/"
+              f"{tag}/{zip_name}"
+          )
+
+          # ZIPのSHA256
           pkg["zipSHA256"] = sha256
 
           index_path = os.environ["INDEX_JSON"]
+
+          # 既存のindex.jsonを読み込む
           if os.path.exists(index_path):
               with open(index_path, encoding="utf-8") as f:
                   index = json.load(f)
@@ -106,173 +121,219 @@ jobs:
                   "name": "hinzka's VPM Repository",
                   "id": "com.hinzka.vpm",
                   "author": "hinzka",
-                  "packages": {},
+                  "packages": {}
               }
 
-          # 【重要】トップレベルのurlは、リポジトリ名の変更等でも必ず正しい値になるよう、
-          # 既存の値があっても毎回このリポジトリの実際の場所で上書きする
-          # (以前は初回生成時のダミー値のまま残ってしまう不具合があった)。
-          index["url"] = f"https://{repo.split('/')[0]}.github.io/{repo.split('/')[1]}/{index_path}"
+          owner, repository = repo.split("/", 1)
 
-          index.setdefault("packages", {}).setdefault(pkg["name"], {}).setdefault("versions", {})
-          index["packages"][pkg["name"]]["versions"][version] = pkg
+          # GitHub Pages上のindex.json URL
+          index["url"] = (
+              f"https://{owner}.github.io/"
+              f"{repository}/{index_path}"
+          )
 
+          # パッケージ情報を追加
+          packages = index.setdefault("packages", {})
+          package_entry = packages.setdefault(pkg["name"], {})
+          versions = package_entry.setdefault("versions", {})
+
+          versions[version] = pkg
+
+          # index.jsonを書き出す
           with open(index_path, "w", encoding="utf-8") as f:
-              json.dump(index, f, ensure_ascii=False, indent=2)
+              json.dump(
+                  index,
+                  f,
+                  ensure_ascii=False,
+                  indent=2
+              )
               f.write("\n")
           PYEOF
 
-- name: GitHub Pages公開用ファイルを作成
-  run: |
-    mkdir -p _site
+      - name: GitHub Pages公開用ファイルを作成
+        run: |
+          mkdir -p _site
 
-    # VPM Repository
-    cp "$INDEX_JSON" "_site/$INDEX_JSON"
+          # VPM Repository
+          cp "$INDEX_JSON" "_site/$INDEX_JSON"
 
-    # Landing Page
-    cat > _site/index.html << 'HTMLEOF'
-    <!DOCTYPE html>
-    <html lang="ja">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          # GitHub Pages Landing Page
+          cat > _site/index.html << 'HTMLEOF'
+          <!DOCTYPE html>
+          <html lang="ja">
 
-      <title>NK Installer</title>
+          <head>
+            <meta charset="UTF-8">
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            >
 
-      <style>
-        * {
-          box-sizing: border-box;
-        }
+            <title>NK Installer</title>
 
-        body {
-          margin: 0;
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-          font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            "Noto Sans JP",
-            sans-serif;
-          background: #f7f7fb;
-          color: #292936;
-        }
+            <style>
+              * {
+                box-sizing: border-box;
+              }
 
-        .card {
-          width: 100%;
-          max-width: 620px;
-          padding: 48px 36px;
-          background: #ffffff;
-          border-radius: 24px;
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-          text-align: center;
-        }
+              body {
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 24px;
 
-        h1 {
-          margin: 0 0 12px;
-          font-size: 36px;
-        }
+                font-family:
+                  -apple-system,
+                  BlinkMacSystemFont,
+                  "Segoe UI",
+                  "Noto Sans JP",
+                  sans-serif;
 
-        .description {
-          margin: 0 auto 32px;
-          line-height: 1.8;
-          color: #666674;
-        }
+                background: #f7f7fb;
+                color: #292936;
+              }
 
-        .vcc-button {
-          display: inline-block;
-          padding: 16px 32px;
-          border-radius: 14px;
-          background: #5856d6;
-          color: #ffffff;
-          text-decoration: none;
-          font-size: 18px;
-          font-weight: 700;
-          transition: transform 0.15s ease, opacity 0.15s ease;
-        }
+              .card {
+                width: 100%;
+                max-width: 620px;
+                padding: 48px 36px;
 
-        .vcc-button:hover {
-          transform: translateY(-2px);
-          opacity: 0.9;
-        }
+                background: #ffffff;
+                border-radius: 24px;
 
-        .manual {
-          margin-top: 36px;
-          padding-top: 28px;
-          border-top: 1px solid #e6e6ec;
-        }
+                box-shadow:
+                  0 12px 40px rgba(0, 0, 0, 0.08);
 
-        .manual p {
-          color: #666674;
-          line-height: 1.7;
-        }
+                text-align: center;
+              }
 
-        code {
-          display: block;
-          margin-top: 14px;
-          padding: 14px;
-          background: #f1f1f6;
-          border-radius: 10px;
-          word-break: break-all;
-          font-size: 13px;
-          user-select: all;
-        }
+              h1 {
+                margin: 0 0 12px;
+                font-size: 36px;
+              }
 
-        .small {
-          margin-top: 26px;
-          font-size: 13px;
-          color: #9999a5;
-        }
-      </style>
-    </head>
+              .description {
+                margin: 0 auto 32px;
+                line-height: 1.8;
+                color: #666674;
+              }
 
-    <body>
+              .vcc-button {
+                display: inline-block;
 
-      <main class="card">
+                padding: 16px 32px;
 
-        <h1>NK Installer</h1>
+                border-radius: 14px;
 
-        <p class="description">
-          VRChat向け NK Installer を<br>
-          VRChat Creator Companion に追加できます。
-        </p>
+                background: #5856d6;
+                color: #ffffff;
 
-        <a
-          class="vcc-button"
-          href="vcc://vpm/addRepo?url=https%3A%2F%2Fhinzka.github.io%2FNK-Installer%2Findex.json"
-        >
-          Add to VCC
-        </a>
+                text-decoration: none;
 
-        <div class="manual">
+                font-size: 18px;
+                font-weight: 700;
 
-          <p>
-            ボタンが動作しない場合は、VCCの<br>
-            <strong>Settings → Packages → Add Repository</strong><br>
-            から以下のURLを追加してください。
-          </p>
+                transition:
+                  transform 0.15s ease,
+                  opacity 0.15s ease;
+              }
 
-          <code>https://hinzka.github.io/NK-Installer/index.json</code>
+              .vcc-button:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
+              }
 
-        </div>
+              .manual {
+                margin-top: 36px;
+                padding-top: 28px;
 
-        <p class="small">
-          NK Installer by hinzka
-        </p>
+                border-top:
+                  1px solid #e6e6ec;
+              }
 
-      </main>
+              .manual p {
+                color: #666674;
+                line-height: 1.7;
+              }
 
-    </body>
-    </html>
-    HTMLEOF
+              code {
+                display: block;
 
-- name: GitHub Pagesへ反映
-  uses: peaceiris/actions-gh-pages@v3
-  with:
-    github_token: ${{ secrets.GITHUB_TOKEN }}
-    publish_dir: ./_site
-    publish_branch: gh-pages
-    keep_files: false
+                margin-top: 14px;
+                padding: 14px;
+
+                background: #f1f1f6;
+
+                border-radius: 10px;
+
+                word-break: break-all;
+
+                font-size: 13px;
+
+                user-select: all;
+              }
+
+              .small {
+                margin-top: 26px;
+
+                font-size: 13px;
+                color: #9999a5;
+              }
+            </style>
+          </head>
+
+          <body>
+
+            <main class="card">
+
+              <h1>NK Installer</h1>
+
+              <p class="description">
+                VRChat向け NK Installer を<br>
+                VRChat Creator Companion に追加できます。
+              </p>
+
+              <a
+                class="vcc-button"
+                href="vcc://vpm/addRepo?url=https%3A%2F%2Fhinzka.github.io%2FNK-Installer%2Findex.json"
+              >
+                Add to VCC
+              </a>
+
+              <div class="manual">
+
+                <p>
+                  ボタンが動作しない場合は、VCCの<br>
+                  <strong>
+                    Settings → Packages → Add Repository
+                  </strong>
+                  <br>
+                  から以下のURLを追加してください。
+                </p>
+
+                <code>
+                  https://hinzka.github.io/NK-Installer/index.json
+                </code>
+
+              </div>
+
+              <p class="small">
+                NK Installer by hinzka
+              </p>
+
+            </main>
+
+          </body>
+
+          </html>
+          HTMLEOF
+
+      - name: GitHub Pagesへ反映
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          keep_files: false
