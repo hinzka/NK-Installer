@@ -7,6 +7,7 @@ VCC / VPM からインストールして使用できます。
 ## Installation
 
 VCC（VRChat Creator Companion）にVPMリポジトリを追加し、対象のUnityプロジェクトへ **NK Installer** をインストールしてください。
+https://hinzka.github.io/NK-Installer/index.json
 
 ## Requirements
 
