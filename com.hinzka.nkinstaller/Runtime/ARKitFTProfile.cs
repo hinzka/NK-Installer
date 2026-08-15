@@ -109,6 +109,6 @@ namespace hinzka.FaceTracking
         public AnimationClip blinkEffectClip;
 
         [Header("出力先")]
-        public string outputFolder = "Assets/hinzka_FaceTracking_ARKit_Generated";
+        public string outputFolder = "Assets/NK_Installer_Generated";
     }
 }

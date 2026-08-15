@@ -1,7 +1,7 @@
 {
   "name": "com.hinzka.nkinstaller",
   "displayName": "NK Installer - Native Key FaceTracking Installer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "unity": "2022.3",
   "description": "アバター作者がつくった表情で、そのままフェイストラッキング。ARKit標準シェイプキーを非破壊で活用するVRCFaceTracking導入ツールです。",
   "author": {

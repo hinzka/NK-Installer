@@ -380,7 +380,7 @@ namespace hinzka.FaceTracking.Editor
         private string _arkitCheckSmrPath = "";
 
         // 出力先
-        private string _outputFolder = "Assets/hinzka_FaceTracking_ARKit_Generated";
+        private string _outputFolder = "Assets/NK_Installer_Generated";
 
 
         // ── UI Toolkit ──────────────────────────────────────
@@ -607,7 +607,7 @@ namespace hinzka.FaceTracking.Editor
         private static readonly string[] PRIORITY_SMR_NAMES =
             { "Body", "body", "Face", "face", "Head", "head" };
 
-        [MenuItem("Tools/hinzka FaceTracking/NK Installer")]
+        [MenuItem("Tools/NK Installer")]
         public static void Open()
         {
             var w = GetWindow<ARKitFaceTrackingInstallerWindow>("NK Installer");
@@ -4408,7 +4408,7 @@ namespace hinzka.FaceTracking.Editor
         /// あらかじめこのフォルダにアバターごとのProfileをまとめておく運用を想定している。
         /// フォルダが存在しない場合は保存時に自動作成する。
         /// </summary>
-        private const string PROFILE_DEFAULT_FOLDER = "Assets/hinzka_FaceTracking/ARKitInstaller/Profiles";
+        private const string PROFILE_DEFAULT_FOLDER = "Assets/NK Installer/hinzka/ARKitInstaller/Profiles";
         private const int VRC_PARAM_BIT_BUDGET = 256;
 
         /// <summary>
