@@ -1,28 +1,37 @@
 # NK Installer
 
-**Native Shape Key ARKit FaceTracking Installer**
-アバター作者がつくった表情で、そのままフェイストラッキング。
+VRChat向けアバター用のフェイストラッキングセットアップを導入するための Unity Editor ツールです。
 
-## インストール後の使い方
+VCC / VPM からインストールして使用できます。
 
-Unityメニューの `Tools > hinzka FaceTracking > NK Installer` からウィンドウを開いてください。
+## Installation
 
-詳しい使い方は `Documentation~/NK_Installer_取扱説明書.docx` をご参照ください。
+VCC（VRChat Creator Companion）にVPMリポジトリを追加し、対象のUnityプロジェクトへ **NK Installer** をインストールしてください。
 
-## 動作環境
+## Requirements
 
-- Unity 2022.3 以降(VRChat公式が案内するバージョンを推奨)
-- VRChat SDK3 - Avatars
-- Modular Avatar
-- NDMF (Modular Avatarの依存として自動導入)
+- VRChat SDK - Avatars
+- Unity / VRChat Creator Companion
 
-### 動作確認環境
+## Third-Party Software
 
-- Unity 2022.3.22f1
-- VRChat SDK3 - Avatars
-- Modular Avatar 1.18.1
-- NDMF 1.14.3
+### OSCmooth
 
-## サポート
+This package includes assets created using or derived from **OSCmooth**.
 
-X(Twitter): [@hinzka](https://twitter.com/hinzka)
+OSCmooth is licensed under the MIT License.
+
+Original project:  
+https://github.com/regzo2/OSCmooth
+
+The copyright notice and license text for OSCmooth are included with this package.
+
+See:
+
+`ThirdPartyLicenses/OSCmooth-LICENSE.txt`
+
+## License
+
+The license for NK Installer and the licenses for third-party components are handled separately.
+
+Third-party components remain subject to their respective licenses.
