@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_HIBIKI
+  m_EditorClassIdentifier: 
+  avatarMatchTag: "HIBIKI,\u30D2\u30D3\u30AD"
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 0
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - Eye_Smile
+  gestureLayerIndices: 020000000300000004000000
+  gestureLayerNames:
+  - Right_Hand
+  - Left_Hand
+  - Face_Override
+  gestureSuppressOnEyesOrMouth: 0
+  generateVisemeCompensation: 1
+  visemeScale: 0.5
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  disableNativeEyeLook: 1
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.5
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated

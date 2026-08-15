@@ -1,0 +1,659 @@
+
+.app-root {
+    flex-grow: 1;
+    min-width: 0;
+    background-color: rgb(42, 42, 42);
+    font-size: 13px;
+}
+
+/* UI Toolkitの組み込みコントロール(DropdownField/PopupField/ObjectField/Toggle/
+   TextField/Button等)は、既定のEditorテーマ側で font-size を明示している場合があり、
+   .app-root の継承だけでは反映されないことがあるため、代表的なクラスへ直接指定する。
+   型セレクタ(Label/Button)はあえて .app-root と組み合わせず詳細度を低く保ち、
+   .hero-title 等の個別クラス指定を上書きしないようにしている。 */
+Label,
+Button {
+    font-size: 13px;
+}
+
+.app-root .unity-base-field__label,
+.app-root .unity-base-popup-field__text,
+.app-root .unity-text-field__input,
+.app-root .unity-base-field__input,
+.app-root .unity-toggle__label,
+.app-root .unity-object-field-display__label {
+    font-size: 13px;
+}
+
+.header-host,
+.tab-host,
+.footer-host,
+.page-host,
+.tab-page,
+.settings-card {
+    min-width: 0;
+}
+
+/* app-root は縦方向のflexコンテナ。ウィンドウが極端に小さくなったとき、
+   ヘッダー/タブ/フッターは絶対に圧縮されず、中央のスクロール領域(main-scroll)
+   だけが縮むようにする。Yogaのflex-shrink既定値に依存せず明示しておくことで、
+   ヘッダーのProfile行がフッターやタブと重なって描画される問題を防ぐ。 */
+.header-host,
+.tab-host,
+.footer-host {
+    flex-shrink: 0;
+}
+
+.header-host {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.main-scroll {
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.page-host {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+}
+
+.footer-host {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    background-color: rgb(42, 42, 42);
+}
+
+.tab-page {
+    flex-grow: 1;
+}
+
+/* Header */
+.hero {
+    flex-shrink: 0;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    background-color: rgb(52, 49, 57);
+    border-left-width: 4px;
+    border-left-color: rgb(231, 128, 174);
+    min-width: 0;
+}
+
+.hero-eyebrow {
+    color: rgb(231, 128, 174);
+    font-size: 12px;
+    -unity-font-style: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.hero-top-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 0;
+}
+
+.lang-field {
+    width: 84px;
+    min-width: 84px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+.lang-field .unity-base-field__label {
+    display: none;
+}
+
+.hero-title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(238, 238, 238);
+    margin-bottom: 2px;
+}
+
+.hero-tagline {
+    color: rgb(210, 205, 216);
+    font-size: 12px;
+    -unity-font-style: italic;
+    margin-bottom: 2px;
+}
+
+.hero-subtitle {
+    color: rgb(188, 181, 198);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.toolbar-row,
+.inline-row,
+.slider-row,
+.selection-row,
+.chip-row,
+.mode-grid,
+.tab-host {
+    flex-direction: row;
+    align-items: center;
+    min-width: 0;
+}
+
+/* 幅が足りないときは子要素を折り返し、押し潰し・重なりによる描画崩れを防ぐ。
+   (slider-row/mode-grid/tab-hostは1行に収まる前提のレイアウトのため対象外) */
+.toolbar-row,
+.inline-row,
+.selection-row {
+    flex-wrap: wrap;
+}
+
+.grow-field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 90px;
+}
+
+.mini-button {
+    min-width: 84px;
+    flex-shrink: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+/* Tabs */
+.tab-host {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2px;
+}
+
+.tab-button {
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 0;
+    height: 32px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 7px 7px 3px 3px;
+    background-color: rgb(52, 52, 55);
+    color: rgb(172, 172, 178);
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(69, 69, 73);
+    -unity-font-style: bold;
+    font-size: 13px;
+}
+
+.tab-button-selected {
+    background-color: rgb(62, 59, 68);
+    color: rgb(235, 229, 239);
+    border-bottom-color: rgb(216, 126, 176);
+}
+
+/* Cards */
+.settings-card {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 11px;
+    border-radius: 9px;
+    background-color: rgb(55, 55, 58);
+    border-left-width: 4px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-top-color: rgb(68, 68, 72);
+    border-right-color: rgb(68, 68, 72);
+    border-bottom-color: rgb(68, 68, 72);
+    overflow: hidden;
+}
+
+/* カード左端は全カード共通の水色に統一する。ヒーロー/タブのピンク(rgb(231,128,174),
+   彩度68%・明度70%)と同じ彩度・明度で色相だけシアン寄りに変えたもの。
+   値が何も設定されていないカードは accent-unset(グレー)を後から追加して上書きする。
+   (両クラスが同時に付いていてもスタイルシート上で後に書かれている方が勝つため、
+   単純な追加/削除だけで切り替えられる) */
+.accent-primary { border-left-color: rgb(128, 205, 231); }
+.accent-unset   { border-left-color: rgb(96, 96, 102); }
+
+.section-header {
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.section-kicker {
+    min-width: 72px;
+    color: rgb(197, 154, 221);
+    -unity-font-style: bold;
+    font-size: 12px;
+    letter-spacing: 0.7px;
+}
+
+.section-title {
+    font-size: 15px;
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+}
+
+.subheading {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: rgb(220, 220, 220);
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+.divider {
+    height: 1px;
+    background-color: rgb(76, 76, 80);
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+/* Hints */
+.hint-box {
+    padding: 7px 9px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    min-width: 0;
+}
+
+.hint-soft { background-color: rgb(61, 59, 65); }
+.hint-info { background-color: rgb(48, 64, 70); }
+.hint-warning { background-color: rgb(78, 65, 45); }
+
+.hint-text {
+    white-space: normal;
+    font-size: 12px;
+    color: rgb(198, 198, 202);
+}
+
+/* Chips */
+.chip-row {
+    flex-wrap: wrap;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+
+.status-chip {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-right: 4px;
+    margin-bottom: 3px;
+    border-radius: 9px;
+    font-size: 12px;
+    -unity-font-style: bold;
+}
+
+.chip-ok { background-color: rgb(48, 91, 72); color: rgb(185, 236, 208); }
+.chip-warning { background-color: rgb(96, 74, 43); color: rgb(245, 211, 150); }
+.chip-neutral { background-color: rgb(71, 71, 78); color: rgb(200, 200, 205); }
+.chip-aqua { background-color: rgb(43, 82, 88); color: rgb(164, 226, 232); }
+.chip-lavender { background-color: rgb(75, 61, 98); color: rgb(211, 190, 240); }
+
+/* カテゴリ別チップ: 各カードのaccent-*と同じ色相を使い、どの機能に関するタグかが
+   色だけでも判別できるようにする(status系のok/warning/neutralは真の状態表現として維持)。 */
+.chip-avatar  { background-color: rgb(63, 45, 88);  color: rgb(199, 176, 232); }
+.chip-face    { background-color: rgb(88, 45, 77);  color: rgb(232, 176, 218); }
+.chip-smile   { background-color: rgb(88, 45, 56);  color: rgb(232, 176, 190); }
+.chip-gesture { background-color: rgb(88, 63, 45);  color: rgb(232, 199, 176); }
+.chip-mouth   { background-color: rgb(49, 45, 88);  color: rgb(181, 176, 232); }
+.chip-eyes    { background-color: rgb(45, 77, 88);  color: rgb(176, 218, 232); }
+.chip-assist  { background-color: rgb(45, 88, 63);  color: rgb(176, 232, 199); }
+
+/* Dynamic selections */
+.selection-list { margin-top: 3px; }
+.selection-row { margin-top: 2px; margin-bottom: 2px; }
+
+.remove-button {
+    width: 30px;
+    min-width: 30px;
+    height: 26px;
+    flex-shrink: 0;
+    margin-left: 4px;
+    margin-top: 4px;
+    border-radius: 6px;
+}
+
+.add-button {
+    height: 28px;
+    margin-top: 4px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    background-color: rgb(67, 67, 72);
+    color: rgb(217, 217, 220);
+}
+
+.index-badge {
+    width: 40px;
+    min-width: 40px;
+    flex-shrink: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: rgb(150, 150, 157);
+    font-size: 11px;
+    -unity-text-align: middle-center;
+}
+
+.nested-panel {
+    margin-left: 10px;
+    margin-top: 4px;
+    padding: 7px;
+    border-radius: 6px;
+    background-color: rgb(49, 49, 52);
+    min-width: 0;
+}
+
+/* Sliders: fixed label + flexible slider + fixed numeric field */
+.slider-row {
+    width: 100%;
+    min-width: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.slider-label {
+    width: 128px;
+    min-width: 128px;
+    max-width: 128px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: 6px;
+    color: rgb(195, 195, 198);
+    font-size: 12px;
+}
+
+.slider-control {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 60px;
+    max-width: 100%;
+    margin-right: 6px;
+    overflow: hidden;
+}
+
+.slider-value {
+    width: 52px;
+    min-width: 52px;
+    max-width: 52px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.slider-value > .unity-base-field__input {
+    min-width: 0;
+}
+
+/* Eye mode */
+.warning-card {
+    padding: 7px 8px;
+    margin-top: 4px;
+    margin-bottom: 7px;
+    border-radius: 6px;
+    border-left-width: 3px;
+    min-width: 0;
+}
+
+.warning-card-alert { background-color: rgb(77, 65, 43); border-left-color: rgb(225, 177, 82); }
+.warning-card-safe { background-color: rgb(45, 72, 62); border-left-color: rgb(91, 195, 145); }
+
+.warning-text {
+    white-space: normal;
+    font-size: 12px;
+    color: rgb(220, 220, 220);
+}
+
+.mode-grid {
+    align-items: stretch;
+    min-width: 0;
+}
+
+.mode-card {
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+    min-width: 0;
+    min-height: 114px;
+    margin-right: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: rgb(48, 49, 53);
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: rgb(74, 74, 80);
+    border-bottom-color: rgb(74, 74, 80);
+    border-left-color: rgb(74, 74, 80);
+    border-right-color: rgb(74, 74, 80);
+}
+
+.recommended-card {
+    margin-left: 4px;
+    margin-right: 0;
+}
+
+.mode-card-selected {
+    border-top-color: rgb(122, 205, 214);
+    border-bottom-color: rgb(122, 205, 214);
+    border-left-color: rgb(122, 205, 214);
+    border-right-color: rgb(122, 205, 214);
+    background-color: rgb(41, 57, 61);
+}
+
+.mode-card:hover {
+    border-top-color: rgb(98, 98, 104);
+    border-bottom-color: rgb(98, 98, 104);
+    border-left-color: rgb(98, 98, 104);
+    border-right-color: rgb(98, 98, 104);
+}
+
+.mode-card-selected:hover {
+    border-top-color: rgb(140, 216, 224);
+    border-bottom-color: rgb(140, 216, 224);
+    border-left-color: rgb(140, 216, 224);
+    border-right-color: rgb(140, 216, 224);
+}
+
+.recommended-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding-left: 6px;
+    padding-right: 7px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 8px;
+    background-color: rgb(44, 101, 108);
+    color: rgb(175, 233, 237);
+    font-size: 11px;
+    -unity-font-style: bold;
+}
+
+.mode-name { -unity-font-style: bold; color: rgb(224, 224, 226); margin-bottom: 4px; }
+.mode-title { -unity-font-style: bold; color: rgb(224, 224, 226); margin-bottom: 4px; font-size: 13px; }
+.mode-description { white-space: normal; color: rgb(164, 164, 169); font-size: 12px; }
+
+.sub-foldout,
+.advanced-foldout { margin-top: 5px; }
+
+.advanced-foldout {
+    margin-bottom: 5px;
+    padding: 9px;
+    border-radius: 9px;
+    background-color: rgb(50, 50, 53);
+}
+
+.browse-button {
+    width: 36px;
+    min-width: 36px;
+    flex-shrink: 0;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+/* Footer is outside the ScrollView and remains visible */
+.install-footer {
+    flex-shrink: 0;
+    padding: 9px 11px;
+    border-radius: 9px;
+    background-color: rgb(48, 57, 66);
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: rgb(67, 101, 126);
+    border-bottom-color: rgb(67, 101, 126);
+    border-left-color: rgb(67, 101, 126);
+    border-right-color: rgb(67, 101, 126);
+    min-width: 0;
+}
+
+.install-title {
+    align-self: center;
+    -unity-font-style: bold;
+    color: rgb(215, 226, 235);
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+
+.centered-row { align-self: center; }
+
+.install-button {
+    height: 40px;
+    margin-top: 5px;
+    border-radius: 7px;
+    background-color: rgb(72, 111, 145);
+    color: white;
+    -unity-font-style: bold;
+    font-size: 15px;
+}
+
+
+/* Profile onboarding */
+.profile-guide {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.hint-profile {
+    background-color: rgb(57, 52, 65);
+}
+
+/* Advanced / Result */
+/* Advanced / Result のカードもaccent-primaryに統一(旧accent-output/accent-resultは廃止) */
+
+.result-body {
+    min-width: 0;
+}
+
+.result-empty {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.result-complete {
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    background-color: rgb(43, 72, 59);
+}
+
+.result-complete-title {
+    color: rgb(149, 231, 188);
+    -unity-font-style: bold;
+    font-size: 15px;
+}
+
+.result-avatar-name {
+    margin-top: 2px;
+    color: rgb(230, 236, 233);
+    -unity-font-style: bold;
+    font-size: 17px;
+}
+
+.result-grid {
+    margin-bottom: 8px;
+    min-width: 0;
+}
+
+.result-row {
+    flex-direction: row;
+    align-items: flex-start;
+    min-width: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(69, 69, 73);
+}
+
+.result-key {
+    width: 128px;
+    min-width: 128px;
+    max-width: 128px;
+    flex-shrink: 0;
+    color: rgb(164, 164, 170);
+    font-size: 12px;
+}
+
+.result-value {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    white-space: normal;
+    color: rgb(218, 218, 222);
+    font-size: 13px;
+}
+
+.result-value-ok { color: rgb(144, 222, 178); }
+.result-value-warning { color: rgb(239, 192, 103); }
+
+.result-path-box {
+    margin-top: 4px;
+    padding: 7px 8px;
+    border-radius: 6px;
+    background-color: rgb(43, 46, 50);
+}
+
+.result-path-title {
+    color: rgb(150, 150, 156);
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.result-path {
+    color: rgb(204, 218, 229);
+    font-size: 12px;
+    white-space: normal;
+}
+
+.result-actions {
+    flex-direction: row;
+    margin-top: 8px;
+    min-width: 0;
+}
+
+.result-action-button {
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    height: 32px;
+    margin-right: 4px;
+}
+
+.result-action-button:last-child {
+    margin-right: 0;
+}
