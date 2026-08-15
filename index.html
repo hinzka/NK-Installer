@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NK Installer</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans JP",
+        sans-serif;
+
+      background: #f7f7fb;
+      color: #292936;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 620px;
+      padding: 48px 36px;
+
+      background: #ffffff;
+      border-radius: 24px;
+
+      box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.08);
+
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+    }
+
+    .description {
+      margin: 0 auto 32px;
+      line-height: 1.8;
+      color: #666674;
+    }
+
+    .vcc-button {
+      display: inline-block;
+
+      padding: 16px 32px;
+
+      border-radius: 14px;
+
+      background: #5856d6;
+      color: #ffffff;
+
+      text-decoration: none;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    }
+
+    .vcc-button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .manual {
+      margin-top: 36px;
+      padding-top: 28px;
+
+      border-top:
+        1px solid #e6e6ec;
+    }
+
+    .manual p {
+      color: #666674;
+      line-height: 1.7;
+    }
+
+    code {
+      display: block;
+
+      margin-top: 14px;
+      padding: 14px;
+
+      background: #f1f1f6;
+
+      border-radius: 10px;
+
+      word-break: break-all;
+
+      font-size: 13px;
+
+      user-select: all;
+    }
+
+    .small {
+      margin-top: 26px;
+
+      font-size: 13px;
+      color: #9999a5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <h1>NK Installer</h1>
+
+    <p class="description">
+      VRChat向け NK Installer を<br>
+      VRChat Creator Companion に追加できます。
+    </p>
+
+    <a
+      class="vcc-button"
+      href="vcc://vpm/addRepo?url=https%3A%2F%2Fhinzka.github.io%2FNK-Installer%2Findex.json"
+    >
+      Add to VCC
+    </a>
+
+    <div class="manual">
+
+      <p>
+        ボタンが動作しない場合は、VCCの<br>
+        <strong>
+          Settings → Packages → Add Repository
+        </strong>
+        <br>
+        から以下のURLを追加してください。
+      </p>
+
+      <code>
+        https://hinzka.github.io/NK-Installer/index.json
+      </code>
+
+    </div>
+
+    <p class="small">
+      NK Installer by hinzka
+    </p>
+
+  </main>
+
+</body>
+
+</html>
