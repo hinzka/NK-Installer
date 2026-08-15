@@ -1,0 +1,28 @@
+# Unityのシリアライズドアセット(YAML形式)は改行コード変換の対象から外し、
+# 意図しない差分・破損を防ぐ(binary扱い = 変換もdiffもしない)。
+*.unity binary
+*.prefab binary
+*.asset binary
+*.mat binary
+*.anim binary
+*.controller binary
+*.overrideController binary
+*.physicMaterial binary
+*.physicsMaterial2D binary
+*.mask binary
+*.mixer binary
+*.meta binary
+
+# コード・設定ファイルはLFに統一する。
+*.cs text eol=lf
+*.json text eol=lf
+*.asmdef text eol=lf
+*.asmref text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# UI Toolkit
+*.uxml text eol=lf
+*.uss text eol=lf

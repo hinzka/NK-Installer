@@ -1,0 +1,127 @@
+# NK Installer VPMパッケージ自動リリース用ワークフロー
+#
+# 【使い方】
+#   1. リポジトリ内に vX.Y.Z 形式のタグ(例: v1.0.1)をプッシュすると自動的に起動します。
+#      package.json の "version" フィールドと、タグの数字部分は必ず一致させてください
+#      (例: package.json が "version": "1.0.1" なら、タグは v1.0.1)。
+#   2. パッケージフォルダ(com.hinzka.nkinstaller/)をzip化し、
+#      GitHub Releaseとして公開します(zipファイルが添付されます)。
+#   3. index.json (VPMリポジトリ一覧)を最新の内容に自動更新し、
+#      gh-pagesブランチへ反映します(GitHub Pagesで配信されます)。
+#
+# 【事前準備】
+#   - リポジトリの Settings > Pages で、Source を "gh-pages branch" に設定してください
+#     (初回はワークフロー実行後に gh-pages ブランチが自動生成されるので、その後で設定します)。
+#   - リポジトリの Settings > Actions > General > Workflow permissions で、
+#     "Read and write permissions" を有効にしてください。
+
+name: Release VPM Package
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+# パッケージフォルダ名とindex.jsonのパスは、実際のリポジトリ構成に合わせて書き換えてください。
+env:
+  PACKAGE_NAME: com.hinzka.nkinstaller
+  PACKAGE_DIR: com.hinzka.nkinstaller
+  INDEX_JSON: index.json
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: タグからバージョン番号を取得
+        id: version
+        run: |
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG_NAME#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: package.jsonのバージョンとタグが一致しているか確認
+        run: |
+          PKG_VERSION=$(python3 -c "import json;print(json.load(open('${PACKAGE_DIR}/package.json'))['version'])")
+          if [ "$PKG_VERSION" != "${{ steps.version.outputs.version }}" ]; then
+            echo "::error::package.json のバージョン($PKG_VERSION)とタグ(${{ steps.version.outputs.tag }})が一致していません。"
+            exit 1
+          fi
+
+      - name: パッケージzipを作成
+        run: |
+          ZIP_NAME="${PACKAGE_NAME}-${{ steps.version.outputs.version }}.zip"
+          cd "$(dirname "$PACKAGE_DIR")"
+          zip -r "$GITHUB_WORKSPACE/$ZIP_NAME" "$(basename "$PACKAGE_DIR")"
+          echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
+
+      - name: zipのSHA256を計算
+        id: hash
+        run: |
+          HASH=$(sha256sum "$ZIP_NAME" | cut -d' ' -f1)
+          echo "sha256=$HASH" >> "$GITHUB_OUTPUT"
+
+      - name: GitHub Releaseを作成しzipを添付
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: "NK Installer ${{ steps.version.outputs.version }}"
+          files: ${{ env.ZIP_NAME }}
+          generate_release_notes: true
+
+      - name: index.jsonへ新バージョンを追記
+        run: |
+          python3 << 'PYEOF'
+          import json, os
+
+          pkg_dir = os.environ["PACKAGE_DIR"]
+          version = "${{ steps.version.outputs.version }}"
+          zip_name = os.environ["ZIP_NAME"]
+          sha256 = "${{ steps.hash.outputs.sha256 }}"
+          repo = os.environ["GITHUB_REPOSITORY"]  # 例: hinzka/NK-Installer
+          tag = "${{ steps.version.outputs.tag }}"
+
+          with open(f"{pkg_dir}/package.json", encoding="utf-8") as f:
+              pkg = json.load(f)
+
+          pkg["url"] = f"https://github.com/{repo}/releases/download/{tag}/{zip_name}"
+          pkg["zipSHA256"] = sha256
+
+          index_path = os.environ["INDEX_JSON"]
+          if os.path.exists(index_path):
+              with open(index_path, encoding="utf-8") as f:
+                  index = json.load(f)
+          else:
+              index = {
+                  "name": "hinzka's VPM Repository",
+                  "id": "com.hinzka.vpm",
+                  "author": "hinzka",
+                  "url": f"https://{repo.split('/')[0]}.github.io/{repo.split('/')[1]}/{index_path}",
+                  "packages": {},
+              }
+
+          index.setdefault("packages", {}).setdefault(pkg["name"], {}).setdefault("versions", {})
+          index["packages"][pkg["name"]]["versions"][version] = pkg
+
+          with open(index_path, "w", encoding="utf-8") as f:
+              json.dump(index, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+          PYEOF
+
+      - name: 公開用フォルダを作成(index.jsonのみ)
+        run: |
+          mkdir -p _site
+          cp "$INDEX_JSON" "_site/$INDEX_JSON"
+
+      - name: index.jsonをgh-pagesブランチへ反映
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          keep_files: false
