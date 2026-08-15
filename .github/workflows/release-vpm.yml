@@ -56,8 +56,13 @@ jobs:
       - name: パッケージzipを作成
         run: |
           ZIP_NAME="${PACKAGE_NAME}-${{ steps.version.outputs.version }}.zip"
-          cd "$(dirname "$PACKAGE_DIR")"
-          zip -r "$GITHUB_WORKSPACE/$ZIP_NAME" "$(basename "$PACKAGE_DIR")"
+          # 【重要】VRChat公式テンプレートと同じ方式: パッケージフォルダの"中"へ移動してから
+          # "."(カレントディレクトリの中身)をzip化する。これにより package.json がzipの
+          # ルート直下に来る(以前は1階層余分にネストしており、VCC側でパッケージの
+          # マニフェストを認識できず、Package Managerがハングする不具合があった)。
+          cd "$PACKAGE_DIR"
+          zip -r "$GITHUB_WORKSPACE/$ZIP_NAME" .
+          cd "$GITHUB_WORKSPACE"
           echo "ZIP_NAME=$ZIP_NAME" >> "$GITHUB_ENV"
 
       - name: zipのSHA256を計算
@@ -101,9 +106,13 @@ jobs:
                   "name": "hinzka's VPM Repository",
                   "id": "com.hinzka.vpm",
                   "author": "hinzka",
-                  "url": f"https://{repo.split('/')[0]}.github.io/{repo.split('/')[1]}/{index_path}",
                   "packages": {},
               }
+
+          # 【重要】トップレベルのurlは、リポジトリ名の変更等でも必ず正しい値になるよう、
+          # 既存の値があっても毎回このリポジトリの実際の場所で上書きする
+          # (以前は初回生成時のダミー値のまま残ってしまう不具合があった)。
+          index["url"] = f"https://{repo.split('/')[0]}.github.io/{repo.split('/')[1]}/{index_path}"
 
           index.setdefault("packages", {}).setdefault(pkg["name"], {}).setdefault("versions", {})
           index["packages"][pkg["name"]]["versions"][version] = pkg
