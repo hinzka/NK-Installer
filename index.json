@@ -2,40 +2,14 @@
   "name": "hinzka's VPM Repository",
   "id": "com.hinzka.vpm",
   "author": "hinzka",
-  "url": "https://hinzka.github.io/vpm-repos/index.json",
+  "url": "https://hinzka.github.io/NK-Installer/index.json",
   "packages": {
     "com.hinzka.nkinstaller": {
       "versions": {
-        "1.0.0": {
+        "1.0.2": {
           "name": "com.hinzka.nkinstaller",
           "displayName": "NK Installer - Native Shape Key ARKit FaceTracking Installer",
-          "version": "1.0.0",
-          "unity": "2022.3",
-          "description": "アバター作者がつくった表情で、そのままフェイストラッキング。ARKit標準シェイプキーを非破壊で活用するVRCFaceTracking導入ツールです。",
-          "author": {
-            "name": "hinzka",
-            "url": "https://twitter.com/hinzka"
-          },
-          "license": "LicenseRef-Proprietary",
-          "keywords": [
-            "vrchat",
-            "facetracking",
-            "vrcft",
-            "arkit",
-            "modular-avatar"
-          ],
-          "vpmDependencies": {
-            "com.vrchat.avatars": ">=3.7.0",
-            "nadena.dev.modular-avatar": ">=1.10.0",
-            "nadena.dev.ndmf": ">=1.4.0"
-          },
-          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.0/com.hinzka.nkinstaller-1.0.0.zip",
-          "zipSHA256": "REPLACE_WITH_ACTUAL_SHA256"
-        },
-        "1.0.1": {
-          "name": "com.hinzka.nkinstaller",
-          "displayName": "NK Installer - Native Shape Key ARKit FaceTracking Installer",
-          "version": "1.0.1",
+          "version": "1.0.2",
           "unity": "2022.3",
           "description": "アバター作者がつくった表情で、そのままフェイストラッキング。ARKit標準シェイプキーを非破壊で活用するVRCFaceTracking導入ツールです。",
           "author": {
@@ -59,8 +33,8 @@
           "legacyFiles": {},
           "changelogUrl": "https://example.com/nk-installer/CHANGELOG.md",
           "documentationUrl": "https://example.com/nk-installer/docs",
-          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.1/com.hinzka.nkinstaller-1.0.1.zip",
-          "zipSHA256": "46b836a4742bac14d3f448ad00d35da9dfa5c350f50083e9bba0db16c4022766"
+          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.0.2/com.hinzka.nkinstaller-1.0.2.zip",
+          "zipSHA256": "f730c0a254c4531e1905dfba55d6d773c622614f9249b7e430a5abc7815026c7"
         }
       }
     }
