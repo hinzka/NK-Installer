@@ -16,7 +16,7 @@
 
 Scene上のアバターから変換した場合、元アバターは非表示になります。処理結果は「詳細/結果」タブにレポート表示されます。
 
-![](JP_UI_InstallWithProfile.png)
+![](Images/JP_UI_InstallWithProfile.png)
 
 
 
@@ -28,17 +28,17 @@ Scene上のアバターから変換した場合、元アバターは非表示に
 
 ### 1. 対象アバター登録・顔メッシュ指定
 
-![](JP_UI_Main_01_Avatar.png)
+![](Images/JP_UI_Main_01_Avatar.png)
 
 最初に、Avatar欄にアバターをセットします。`AvatarDescriptor`が設定されたHumanoidアバターである必要があります。Project内のアバターPrefabでも、Scene上のアバターオブジェクトでも構いません。
 
-![](JP_UI_Main_02_FaceMesh.png)
+![](Images/JP_UI_Main_02_FaceMesh.png)
 
 該当アバターの`SkinnedMeshRenderer`名の一覧がプルダウンメニューに表示されます。表情シェイプキーを含むメッシュオブジェクトを選択してください。選択したメッシュが持つシェイプキー名を自動検索し、検出したARKitシェイプキー数をカウント表示します。
 
 ### 2. にっこり目
 
-![](JP_UI_Main_03_SmileEyes.png)
+![](Images/JP_UI_Main_03_SmileEyes.png)
 
 「にっこり笑う両目」で発動する目元のシェイプキーを登録します。まばたきとは排他で動作します。
 
@@ -46,7 +46,7 @@ Scene上のアバターから変換した場合、元アバターは非表示に
 
 ### 3. ジェスチャー/メニュー表情の抑制
 
-![](JP_UI_Main_04_GestureMenu.png)
+![](Images/JP_UI_Main_04_GestureMenu.png)
 
 アバター本来のFXから、フェイストラッキング実行中に抑制したいレイヤーを指定します。
 
@@ -64,7 +64,7 @@ TrackingControlが使われているレイヤーを検出すると、タグで�
 
 ### 4. 音声リップシンク形状の抑制
 
-![](JP_UI_Tracking_01_Viseme.png)
+![](Images/JP_UI_Tracking_01_Viseme.png)
 
 `AvatarDescriptor`の情報をもとに、Viseme打消しシェイプキーを生成します。`AvatarDescriptor`にVisemeが設定されていない場合は何も行いません。
 
@@ -72,7 +72,7 @@ TrackingControlが使われているレイヤーを検出すると、タグで�
 
 ### 5. 目線・まばたきの制御
 
-![](JP_UI_Tracking_02_Eyes.png)
+![](Images/JP_UI_Tracking_02_Eyes.png)
 
 `AvatarDescriptor`の情報をもとに、目線シェイプキーを生成します。`AvatarDescriptor`にEyeLookが設定されていない場合は何も行いません。
 
@@ -80,7 +80,7 @@ TrackingControlが使われているレイヤーを検出すると、タグで�
 
 ### 6. 左右まばたきの安定化
 
-![](JP_UI_Tracking_03_BlinkStabikization.png)
+![](Images/JP_UI_Tracking_03_BlinkStabikization.png)
 
 デバイスによっては左右の目のトラッキングにばらつきが出てしまい、片目だけ半目になってしまう場合があります。
 このような不自然な目つきを抑制するため、左右の目の開きを一定の閾値で補正します。
@@ -89,13 +89,13 @@ TrackingControlが使われているレイヤーを検出すると、タグで�
 
 ### 7. 眉アシスト
 
-![](JP_UI_Tracking_04_BrowAssist.png)
+![](Images/JP_UI_Tracking_04_BrowAssist.png)
 
 眉トラッキング機能のないデバイスで、目の見開きに連動して眉を動かします。
 
 ### 8. 舌アシスト
 
-![](JP_UI_Tracking_05_TongueAssist.png)
+![](Images/JP_UI_Tracking_05_TongueAssist.png)
 
 舌を持ち上げるシェイプキーを自動作成し、舌が出る途中で下唇を貫通してしまうのを回避します。チェックがOFFの場合、舌を出すと`tongueOut`がそのまま動作します。
 
@@ -106,7 +106,7 @@ TrackingControlが使われているレイヤーを検出すると、タグで�
 
 ### 9. おまけ機能
 
-![](JP_UI_Tracking_06_BonusFeature.png)
+![](Images/JP_UI_Tracking_06_BonusFeature.png)
 
 まばたきでうるうる揺れる瞳ハイライトなど、演出用のアニメーションクリップを登録できます。
 

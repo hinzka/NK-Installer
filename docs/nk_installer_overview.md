@@ -13,7 +13,7 @@ NK Installerは、VRChat用アバターに対し、VRChatおよびVRCFaceTrackin
 
 ## ①テンプレートFX
 
-![418](TemplateFX.png)
+![418](Images/TemplateFX.png)
 
 **汎用FX**
 アバターが持つARKitの表情をそのまま動かせる汎用のテンプレートを用意しました。
@@ -26,7 +26,7 @@ OSCmoothにより、フェイストラッキングで使用するパラメータ
 アバター側にシェイプキーが不足していたり、エントリーのみで頂点移動が0だった場合、該当の表情の同期パラメータを削減できます。
 
 
-![417](JP_UI_BasicSettings.png)
+![417](Images/JP_UI_BasicSettings.png)
 
 ## ② Profile管理
 
@@ -46,7 +46,7 @@ OSCmoothにより、フェイストラッキングで使用するパラメータ
 ジェスチャーによる表情切り替えを抑制し、フェイストラッキングとの競合による表情の破綻を回避します。
 
 
-![412](JP_UI_Tracking.png)
+![412](Images/JP_UI_Tracking.png)
 ## ⑥ 音声リップシンク形状の抑制
 
 `AvatarDescriptor`の情報をもとにViseme打消しシェイプキーを生成し、Visemeとフェイストラッキングとのオーバーラップによる口元の破綻を回避します。
@@ -73,7 +73,7 @@ OSCmoothにより、フェイストラッキングで使用するパラメータ
 
 まばたきで揺れる瞳ハイライトエフェクト用に、アニメーションクリップを追加できるスロットを用意しています。
 
-![420](JP_UI_Result.png)
+![420](Images/JP_UI_Result.png)
 ## ⑫ 個別フォルダ出力
 
 Installのたびに新しいフォルダを生成し、必要なデータを格納します。既存の環境を汚さずにInstallできます。
