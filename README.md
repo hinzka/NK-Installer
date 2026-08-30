@@ -1,8 +1,12 @@
 # NK Installer
 
-VRChat向けアバター用のフェイストラッキングセットアップを導入するための Unity Editor ツールです。
+VRChat用アバターが持っているARKitシェイプキーを検知し、VRCFT向けのフェイストラッキング設定を簡単に導入するための Unity Editor ツールです。
 
 VCC / VPM からインストールして使用できます。
+
+※VRChatでフェイストラッキングを利用するには別途VRCFTが必要です。VRChat公式のSelfie Expression（Webカメラトラッキング）では動作しません。
+
+同期するExpression Parametersの消費数は151です。（一部のシェイプキーが欠落していたり、シェイプキー名の登録だけで中身が空だった場合、検知してその分のパラメータを節約します。）
 
 ## Installation
 
