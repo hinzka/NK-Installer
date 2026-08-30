@@ -9,6 +9,10 @@ NK Installerは、VRChat用アバターに対し、VRChatおよびVRCFaceTrackin
 - VRChat公式の「Selfie Expression」(Webカメラトラッキング)とは異なる機能です
 - 利用には、VRCFTの導入と、フェイストラッキングに対応したデバイスが別途必要です
 
+具体的な使い方についてはマニュアルをご確認ください。
+[NK Installer 使い方マニュアル](nk_installer_usage_manual.md)
+
+
 ---
 
 ## ①テンプレートFX
