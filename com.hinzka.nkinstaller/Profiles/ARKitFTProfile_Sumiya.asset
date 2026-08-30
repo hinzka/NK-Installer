@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Sumiya
   m_EditorClassIdentifier: 
   avatarMatchTag: "Sumiya,\u30B9\u30FC\u30DF\u30E4"
+  shopName: WARPSTORE / WARPSTAR
+  versionName: Ver.1.4
   faceSMRPath: Meshes/Face/Body
   arkitShapePrefix: Facials.
   ueFallbackEnabled: 0
@@ -24,18 +26,36 @@ MonoBehaviour:
   squintShapeNames:
   - Facials.Eye_Smile_L
   - Facials.Eye_Smile_R
-  gestureLayerIndices: 0800000009000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 08000000090000000a0000000b0000000c0000000d000000
   gestureLayerNames:
   - 08_[ USER EDIT ] FACE EMOTE PLAYER
   - 09_[ USER EDIT ] FACE EMOTE OVERRIDE
-  gestureSuppressOnEyesOrMouth: 0
+  - 10_Eye_Tracking
+  - 11_Eye_Control
+  - 12_Eye_Reset
+  - 13_BLINK
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 0
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: Facials.Mouth_Tongue_Up
+  tongueExistingLiftShapeWeight: 60
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

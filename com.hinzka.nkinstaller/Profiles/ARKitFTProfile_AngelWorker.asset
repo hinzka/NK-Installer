@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
   m_Name: ARKitFTProfile_AngelWorker
   m_EditorClassIdentifier: 
-  avatarMatchTag: AW,AngelWorker
+  avatarMatchTag: "AW,AngelWorker,\u5929\u4F7F\u30EA\u30FC\u30DE\u30F3"
+  shopName: "kaibatu2mm LAB / \u304B\u3044\u3070\u30642mm"
+  versionName: V2.2
   faceSMRPath: AW/face
   arkitShapePrefix: FT.
   ueFallbackEnabled: 0
@@ -23,21 +25,32 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - BS.eye_hohoemi
-  gestureLayerIndices: 0100000003000000040000000500000006000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 0100000003000000
   gestureLayerNames:
   - Left Hand
   - facial
-  - head_parts
-  - tere
-  - brows_thin
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 0.5
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.002
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

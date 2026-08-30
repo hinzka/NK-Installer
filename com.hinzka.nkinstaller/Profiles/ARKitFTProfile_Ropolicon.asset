@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Ropolicon
   m_EditorClassIdentifier: 
   avatarMatchTag: ws_kon_p
+  shopName: "\u307F\u3069\u308A\u306E\u68EE / midori"
+  versionName: ver1.00
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - eye_smile
-  gestureLayerIndices: 0800000009000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 08000000090000000a000000
   gestureLayerNames:
   - Face EmotePlayer
   - Face Emote Override
-  gestureSuppressOnEyesOrMouth: 0
+  - Blink
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

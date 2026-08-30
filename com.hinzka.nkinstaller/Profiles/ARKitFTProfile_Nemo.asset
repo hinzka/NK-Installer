@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Nemo
   m_EditorClassIdentifier: 
   avatarMatchTag: "Nemo,\u30CD\u30E2"
+  shopName: FLASTORE / FLANK
+  versionName: v1.0.4
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - Eyes_Close_Smile_1
-  gestureLayerIndices: 0100000002000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 010000000200000003000000
   gestureLayerNames:
   - Left Hand (Mouth)
   - Right Hand (Eyes)
-  gestureSuppressOnEyesOrMouth: 0
+  - BlinkControl
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
-  disableNativeEyeLook: 1
+  disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.003
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

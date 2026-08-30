@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Miya
   m_EditorClassIdentifier: 
   avatarMatchTag: "Miya,\u30DF\u30E4"
+  shopName: namekuji1337 / namekuji1337
+  versionName: Ver1.0.2
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -22,7 +24,9 @@ MonoBehaviour:
   eyeSmrSeparate: 0
   eyeSMRPath: 
   squintShapeNames:
-  - ----------VRC----------
+  - EyesBlink2
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 0100000002000000030000000a0000000b000000
   gestureLayerNames:
   - Left Hand
@@ -30,14 +34,26 @@ MonoBehaviour:
   - expressions
   - EyesMove
   - EyeClosedRadial
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: Tongue ZPositonUP
+  tongueExistingLiftShapeWeight: 50
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

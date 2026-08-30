@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Fluctua
   m_EditorClassIdentifier: 
   avatarMatchTag: "Fluctua,\u30D5\u30E9\u30AF\u30C1\u30E5\u30A2"
+  shopName: "Froginyata Store / Froginyata\uFF08\u306B\u3083\u30FC\u305F\uFF09"
+  versionName: v1.2
   faceSMRPath: Face
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,19 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - EyeBlinkSmile
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 08000000090000000a000000
   gestureLayerNames:
   - Face Emote Player (Hyoujou)
   - Face by Emotions
   - NadeNade Emote Player
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.006
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

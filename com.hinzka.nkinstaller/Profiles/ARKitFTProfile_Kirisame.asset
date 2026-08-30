@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_Kirisame
+  m_EditorClassIdentifier: 
+  avatarMatchTag: Kirisame
+  shopName: "Xelevia_Industry / \u305C\u308C\u3094\u3043\u3042"
+  versionName: ver1.00
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 0
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - eye_smile_1
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 0300000004000000050000000600000007000000
+  gestureLayerNames:
+  - Left Hand
+  - Right Hand
+  - Facial_Head_Contact
+  - Facial
+  - Look
+  generateVisemeCompensation: 1
+  visemeScale: 1
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  disableNativeEyeLook: 0
+  blinkControlMode: 0
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0.17
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/NK_Installer_Generated

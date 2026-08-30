@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Luve
   m_EditorClassIdentifier: 
   avatarMatchTag: "Luve,\u30EB\u30F4"
+  shopName: "SMOKY DOLLS / \u677E\u672C\u30A4\u30C8"
+  versionName: v1.2
   faceSMRPath: Face
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,19 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - eye_blink_smile
-  gestureLayerIndices: 070000000800000009000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 08000000090000000a000000
   gestureLayerNames:
-  - '[ USER EDIT ] DEFAULT FACE'
   - '[ USER EDIT ] FACE EMOTE PLAYER'
   - '[ USER EDIT ] FACE EMOTE OVERRIDE'
-  gestureSuppressOnEyesOrMouth: 0
+  - BLINK
   generateVisemeCompensation: 1
   visemeScale: 0.45
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

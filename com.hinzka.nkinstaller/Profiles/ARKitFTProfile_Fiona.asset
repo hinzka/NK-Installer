@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Fiona
   m_EditorClassIdentifier: 
   avatarMatchTag: "Fiona,\u30D5\u30A3\u30AA\u30CA"
+  shopName: namekuji1337 / namekuji1337
+  versionName: 2.0.1
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,19 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - "\u7B11\u3044.VRC"
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 010000000200000003000000
   gestureLayerNames:
   - Left Hand
   - Right Hand
   - expressions
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

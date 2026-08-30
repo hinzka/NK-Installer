@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Fyuett
   m_EditorClassIdentifier: 
   avatarMatchTag: "Fyuett,\u30D5\u30A3\u30E6\u30A8"
+  shopName: "HARUNOPUPU / \u30CF\u30EB\u30CE\u30D7\u30D7"
+  versionName: ver1.1
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,32 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - eyelid_close_smile00
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 0100000002000000
   gestureLayerNames:
   - Face_Right
   - Face_Left (Priority)
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.2
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.007
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 2.18
+  tongueLipExcludeThresholdMm: 0
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

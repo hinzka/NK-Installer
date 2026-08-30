@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Gabu
   m_EditorClassIdentifier: 
   avatarMatchTag: "Gabu.\u304C\u3076"
+  shopName: "\u3042\u307E\u3068\u3089\u3093\u3069 - AmatoLand / \u5929\u514E\u3072\u306A\u305F"
+  versionName: 1.01
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - "\u7B11\u3044"
-  gestureLayerIndices: 0100000002000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 000000000100000002000000
   gestureLayerNames:
+  - Blink
   - Left Hand
   - Right Hand
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
-  disableNativeEyeLook: 1
+  disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 0
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

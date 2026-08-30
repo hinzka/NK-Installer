@@ -13,31 +13,47 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Shinra
   m_EditorClassIdentifier: 
   avatarMatchTag: "Shinra,\u68EE\u7F85"
+  shopName: mio3io / mio
+  versionName: v1.2.8
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
   disableSyncForEmptyShapes: 1
-  leftEyeConstraintPath: 
-  rightEyeConstraintPath: 
+  leftEyeConstraintPath: Armature/Hips/Spine/Chest/Neck/Head/XC_Eyes/XC_EyeWeight_L
+  rightEyeConstraintPath: Armature/Hips/Spine/Chest/Neck/Head/XC_Eyes/XC_EyeWeight_R
   eyeSmrSeparate: 0
   eyeSMRPath: 
   squintShapeNames:
   - Eyes_smile_L
   - Eyes_smile_R
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 01000000020000000300000004000000
   gestureLayerNames:
   - Eyelids Blink
   - Left Hand
   - Right Hand
   - Face
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: Tongue_moveUp
+  tongueExistingLiftShapeWeight: 25
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

@@ -78,8 +78,16 @@ namespace hinzka.FaceTracking.DevTools
             new ShapeSpec("eyeLookOutRight",  EyeSide.Right, LookDir.Out),
         };
 
-        /// <summary>Eye Look に必要な前提(ボーン設定・SMR Read/Write)を満たしているか確認する。</summary>
-        public static string Validate(VRCAvatarDescriptor avatarDescriptor, SkinnedMeshRenderer targetSmr)
+        /// <summary>
+        /// Eye Look に必要な前提(ボーン設定・SMR Read/Write)を満たしているか確認する。
+        /// leftConstraintTarget/rightConstraintTarget を指定した場合(Constraint方式)は、
+        /// AvatarDescriptorのLeft Eye/Right Eyeそのものではなく、そちらのBones配列所属を確認する
+        /// (Constraint方式では、実際にスキンウェイトが乗っているのはConstraintの出力側であり、
+        /// AvatarDescriptor登録ボーン自体がBonesに含まれないのが正常なため)。
+        /// </summary>
+        public static string Validate(
+            VRCAvatarDescriptor avatarDescriptor, SkinnedMeshRenderer targetSmr,
+            Transform leftConstraintTarget = null, Transform rightConstraintTarget = null)
         {
             if (avatarDescriptor == null) return "Avatar Descriptor が指定されていません。";
             if (targetSmr == null) return "対象の SkinnedMeshRenderer が指定されていません。";
@@ -92,7 +100,43 @@ namespace hinzka.FaceTracking.DevTools
             if (!targetSmr.sharedMesh.isReadable)
                 return "対象メッシュの Read/Write が無効です(Import Settings で有効にしてください)。";
 
+            // 実際にスキニングへ関与しているはずのボーン(Constraint方式ならターゲット側、
+            // そうでなければAvatarDescriptor登録ボーンそのもの)が、対象SMRのBones配列
+            // (=スキニングに使われているボーン)に含まれているかを確認する。含まれていない場合、
+            // そのボーンをいくら回転させてもメッシュは一切変形しない
+            // (名前が似た別オブジェクトを誤って参照している場合によく起こる)。
+            var checkLeft = leftConstraintTarget != null ? leftConstraintTarget : s.leftEye;
+            var checkRight = rightConstraintTarget != null ? rightConstraintTarget : s.rightEye;
+
+            var bones = targetSmr.bones;
+            bool leftInBones = bones != null && System.Array.IndexOf(bones, checkLeft) >= 0;
+            bool rightInBones = bones != null && System.Array.IndexOf(bones, checkRight) >= 0;
+            if (!leftInBones || !rightInBones)
+            {
+                var missing = new List<string>();
+                if (!leftInBones) missing.Add($"Left側('{GetHierarchyPath(checkLeft)}')");
+                if (!rightInBones) missing.Add($"Right側('{GetHierarchyPath(checkRight)}')");
+                return $"{string.Join(" / ", missing)}が、対象SMR('{targetSmr.name}')のBones配列に" +
+                       "含まれていません。名前が似た別のボーンを誤って参照している可能性があります。" +
+                       (leftConstraintTarget != null || rightConstraintTarget != null
+                           ? "指定したConstraintターゲットが、実際にウェイトが乗っているボーンと同一かご確認ください。"
+                           : "AvatarDescriptorのEye Look設定でLeft Eye/Right Eyeフィールドをクリックし、" +
+                             "Hierarchy上でハイライトされるオブジェクトが、実際にウェイトが乗っているボーンと" +
+                             "同一かご確認ください。");
+            }
+
             return null;
+        }
+
+        /// <summary>デバッグ用: Transformのルートからのフルパスを返す。</summary>
+        private static string GetHierarchyPath(Transform t)
+        {
+            if (t == null) return "(null)";
+            var stack = new List<string>();
+            var cur = t;
+            while (cur != null) { stack.Add(cur.name); cur = cur.parent; }
+            stack.Reverse();
+            return string.Join("/", stack);
         }
 
         /// <summary>対象メッシュに8シェイプ(接頭辞付き)が全て既に存在するかどうか。</summary>
@@ -152,12 +196,21 @@ namespace hinzka.FaceTracking.DevTools
             var posedMeshesToCleanup = new List<Mesh>();
             bool createdMeshHere = false;
 
+            // SkinnedMeshRenderer.BakeMeshは、そのSMRが画面に描画されていない(カメラに映っていない)と
+            // 最新のボーン姿勢を反映せず古い結果を返すことがある(Unityの既知の挙動)。
+            // ベイク中は強制的に最新のスキニング結果を計算させ、終了後に元の設定へ復元する。
+            bool originalUpdateWhenOffscreen = targetSmr.updateWhenOffscreen;
+            bool originalForceMatrixRecalc = targetSmr.forceMatrixRecalculationPerRender;
+            targetSmr.updateWhenOffscreen = true;
+            targetSmr.forceMatrixRecalculationPerRender = true;
+
             try
             {
                 // ---- 基準(レスト)ベイク ----
                 leftEye.localRotation = leftRest;
                 rightEye.localRotation = rightRest;
                 baseMesh = new Mesh();
+                Physics.SyncTransforms();
                 targetSmr.BakeMesh(baseMesh, true);
                 var baseVerts = baseMesh.vertices;
                 var baseNormals = baseMesh.normals;
@@ -194,6 +247,7 @@ namespace hinzka.FaceTracking.DevTools
                     else rightEye.localRotation = rot;
 
                     var posedMesh = new Mesh();
+                    Physics.SyncTransforms();
                     targetSmr.BakeMesh(posedMesh, true);
                     posedMeshesToCleanup.Add(posedMesh);
 
@@ -243,6 +297,8 @@ namespace hinzka.FaceTracking.DevTools
             {
                 leftEye.localRotation = leftRest;
                 rightEye.localRotation = rightRest;
+                targetSmr.updateWhenOffscreen = originalUpdateWhenOffscreen;
+                targetSmr.forceMatrixRecalculationPerRender = originalForceMatrixRecalc;
 
                 if (baseMesh != null) Object.DestroyImmediate(baseMesh);
                 foreach (var m in posedMeshesToCleanup) Object.DestroyImmediate(m);
@@ -297,7 +353,7 @@ namespace hinzka.FaceTracking.DevTools
             var added = new List<string>();
             emptyDeltaNames = new List<string>();
 
-            var err = Validate(avatarDescriptor, targetSmr);
+            var err = Validate(avatarDescriptor, targetSmr, leftConstraintTarget, rightConstraintTarget);
             if (err != null)
             {
                 Debug.LogWarning($"[EyeLookBaker] {err}");
@@ -331,10 +387,20 @@ namespace hinzka.FaceTracking.DevTools
                 if (rightConstraintTarget != null) rightConstraintTarget.rotation = rightEye.rotation;
             }
 
+            // SkinnedMeshRenderer.BakeMeshは、そのSMRが画面に描画されていない(カメラに映っていない)と
+            // 最新のボーン姿勢を反映せず古い結果を返すことがある(Unityの既知の挙動)。
+            // Installerが複製する作業用アバターは選択・可視状態とは限らないため、ベイク中は強制的に
+            // 最新のスキニング結果を計算させ、終了後に元の設定へ復元する。
+            bool originalUpdateWhenOffscreen = targetSmr.updateWhenOffscreen;
+            bool originalForceMatrixRecalc = targetSmr.forceMatrixRecalculationPerRender;
+            targetSmr.updateWhenOffscreen = true;
+            targetSmr.forceMatrixRecalculationPerRender = true;
+
             try
             {
                 ApplyPose(leftRest, rightRest);
                 baseMesh = new Mesh();
+                Physics.SyncTransforms();
                 targetSmr.BakeMesh(baseMesh, true);
                 var baseVerts = baseMesh.vertices;
                 var baseNormals = baseMesh.normals;
@@ -351,6 +417,7 @@ namespace hinzka.FaceTracking.DevTools
                         spec.side == EyeSide.Right ? rot : rightRest);
 
                     var posed = new Mesh();
+                    Physics.SyncTransforms();
                     targetSmr.BakeMesh(posed, true);
                     posedCleanup.Add(posed);
 
@@ -396,6 +463,8 @@ namespace hinzka.FaceTracking.DevTools
                     leftConstraintTarget.rotation = leftTargetRest.Value;
                 if (rightConstraintTarget != null && rightTargetRest.HasValue)
                     rightConstraintTarget.rotation = rightTargetRest.Value;
+                targetSmr.updateWhenOffscreen = originalUpdateWhenOffscreen;
+                targetSmr.forceMatrixRecalculationPerRender = originalForceMatrixRecalc;
                 if (baseMesh != null) Object.DestroyImmediate(baseMesh);
                 foreach (var m in posedCleanup) Object.DestroyImmediate(m);
             }

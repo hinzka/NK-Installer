@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_Kalne
+  m_EditorClassIdentifier: 
+  avatarMatchTag: "Kalne,\u30AB\u30EB\u30CD"
+  shopName: AugmentedDolls / Puton.
+  versionName: v1.22
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 0
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - eye_smile_close
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 020000000300000004000000050000000b0000000e000000
+  gestureLayerNames:
+  - eyelook
+  - eyelookReset
+  - Left Hand
+  - Right Hand
+  - Expression
+  - BlinkControl
+  generateVisemeCompensation: 1
+  visemeScale: 1
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  disableNativeEyeLook: 1
+  blinkControlMode: 0
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.006
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 0.47
+  tongueLipExcludeThresholdMm: 5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/NK_Installer_Generated

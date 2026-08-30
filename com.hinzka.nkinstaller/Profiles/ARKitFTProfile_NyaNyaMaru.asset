@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_NyaNyaMaru
   m_EditorClassIdentifier: 
   avatarMatchTag: "NyaNyaMaru,\u306B\u3083\u306B\u3083\u307E\u308B"
+  shopName: kai 9 / kaiiiiiiiii
+  versionName: Ver1.01
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,32 @@ MonoBehaviour:
   eyeSMRPath: Eye
   squintShapeNames:
   - Eye_Carm
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 0800000009000000
   gestureLayerNames:
   - '[ USER EDIT ] FACE EMOTE PLAYER'
   - '[ USER EDIT ] FACE EMOTE OVERRIDE'
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.002
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1.21
+  tongueLipExcludeThresholdMm: 5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0.24
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Menno
   m_EditorClassIdentifier: 
   avatarMatchTag: "Menno,\u30E1\u30CE"
+  shopName: emudotto / M.
+  versionName: v1.08
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,6 +25,8 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - "EYE_\u7B11\u9854_Smile"
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 010000000200000003000000060000000700000008000000
   gestureLayerNames:
   - Left Hand
@@ -31,14 +35,26 @@ MonoBehaviour:
   - fix_Face_Change
   - fix_Left Hand
   - fix_Right Hand
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: "TONGUE_\u4E0A_Up"
+  tongueExistingLiftShapeWeight: 20
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

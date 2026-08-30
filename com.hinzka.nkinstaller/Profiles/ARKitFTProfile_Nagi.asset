@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Nagi
   m_EditorClassIdentifier: 
   avatarMatchTag: Nagi
+  shopName: rio3d / rio
+  versionName: v1.1
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,21 +25,36 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - eye_close2
-  gestureLayerIndices: 0200000003000000040000000500000006000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 010000000200000003000000040000000500000006000000
   gestureLayerNames:
+  - Blink
   - Left Hand
   - Right Hand
   - FaceFix Control
   - Eye Move
   - Head Contact
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: tongue_up
+  tongueExistingLiftShapeWeight: 30
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

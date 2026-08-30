@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
   m_Name: ARKitFTProfile_Wormiesock
   m_EditorClassIdentifier: 
-  avatarMatchTag: KidWormiesock,Wormiesock
+  avatarMatchTag: Wormiesock
+  shopName: ponkke / Ponkke
+  versionName: 1.3
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 1
@@ -22,19 +24,33 @@ MonoBehaviour:
   eyeSmrSeparate: 0
   eyeSMRPath: 
   squintShapeNames: []
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 010000000200000003000000
   gestureLayerNames:
   - Left Hand
   - Right Hand
   - Expressions
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.2
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: TongueUp
+  tongueExistingLiftShapeWeight: 50
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

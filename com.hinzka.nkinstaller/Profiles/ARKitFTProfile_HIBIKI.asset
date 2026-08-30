@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_HIBIKI
   m_EditorClassIdentifier: 
   avatarMatchTag: "HIBIKI,\u30D2\u30D3\u30AD"
+  shopName: "AO\u3042\u304A\u5802 / AO\u3042\u304A"
+  versionName: v1.0.1
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,19 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - Eye_Smile
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 020000000300000004000000
   gestureLayerNames:
   - Right_Hand
   - Left_Hand
   - Face_Override
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 0.5
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 5
+  tongueLipExcludeThresholdMm: 0
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0.48
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_Shiratsume
+  m_EditorClassIdentifier: 
+  avatarMatchTag: Shiratsume
+  shopName: "HARUNOPUPU / \u30CF\u30EB\u30CE\u30D7\u30D7"
+  versionName: 1.6
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 0
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - eyelid_close_smile00
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 01000000020000000300000007000000
+  gestureLayerNames:
+  - Face_Right
+  - Face_Left (Priority)
+  - Auto_Blink
+  - Control Eye Tracking (Local)
+  generateVisemeCompensation: 1
+  visemeScale: 1
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  disableNativeEyeLook: 0
+  blinkControlMode: 0
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 0.92
+  tongueLipExcludeThresholdMm: 0
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0.27
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/NK_Installer_Generated

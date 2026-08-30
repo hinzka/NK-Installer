@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Marycia
   m_EditorClassIdentifier: 
   avatarMatchTag: "Marycia,\u30DE\u30EA\u30B7\u30A2"
+  shopName: BeroarN / Beroar
+  versionName: ver1.5.1
   faceSMRPath: bn0010_Face
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,17 +25,31 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - "\u7B11\u3044"
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 01000000
   gestureLayerNames:
   - FaceSetGesture
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.003
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

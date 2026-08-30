@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_HellWorker
   m_EditorClassIdentifier: 
   avatarMatchTag: "HellWorker,\u60AA\u9B54\u30EA\u30FC\u30DE\u30F3"
+  shopName: "kaibatu2mm LAB / \u304B\u3044\u3070\u30642mm"
+  versionName: 1.2.1
   faceSMRPath: DEV_2023/head
   arkitShapePrefix: FT.
   ueFallbackEnabled: 0
@@ -23,21 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - face_BS.eye_evil_smile
-  gestureLayerIndices: 0100000003000000040000000500000006000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 010000000300000004000000
   gestureLayerNames:
   - Left Hand
   - facial
   - head_parts
-  - brows_nervous
-  - brows_thin
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.2
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 1
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

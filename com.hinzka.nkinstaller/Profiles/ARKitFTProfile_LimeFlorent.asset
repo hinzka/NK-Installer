@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_LimeFlorent
   m_EditorClassIdentifier: 
   avatarMatchTag: "LimeFlorent,\u767D\u732B\u30E9\u30A4\u30E0"
+  shopName: "\u9ED2\u732B\u6D0B\u54C1\u5E97 / \u30AF\u30ED\u30A4\u30CB\u30E3\u30F3"
+  versionName: v1.0.2
   faceSMRPath: Base/Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,17 +25,31 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - "\u7B11\u98541"
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 01000000
   gestureLayerNames:
   - FaceLayer
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 0.5
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

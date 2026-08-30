@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Ronroneo
   m_EditorClassIdentifier: 
   avatarMatchTag: "Ronroneo,\u30ED\u30F3\u30ED\u30CD\u30AA"
+  shopName: Ameinias Noctis / URO
+  versionName: v2.10
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,19 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - Eye_smile
-  gestureLayerIndices: 010000000200000003000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 000000000100000002000000
   gestureLayerNames:
-  - Blink_anime
+  - AllParts
   - Left Hand
   - Right Hand
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 1
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: Tongue_up
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

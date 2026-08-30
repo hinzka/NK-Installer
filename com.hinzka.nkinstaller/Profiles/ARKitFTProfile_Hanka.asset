@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Hanka
   m_EditorClassIdentifier: 
   avatarMatchTag: "Hanka,\u6591\u971E,\u306F\u3093\u304B"
+  shopName: "StudioYONO / \u3088\u306E"
+  versionName: Ver1.1
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,32 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - SmileBlink
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
   gestureLayerIndices: 0800000009000000
   gestureLayerNames:
   - '[ USER EDIT ] FACE EMOTE PLAYER'
   - '[ USER EDIT ] FACE EMOTE OVERRIDE'
-  gestureSuppressOnEyesOrMouth: 0
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: 
+  tongueExistingLiftShapeWeight: 100
+  tongueMoveAmount: 0.005
+  tongueLiftAxis: 3
+  tongueDetectThresholdMm: 3.67
+  tongueLipExcludeThresholdMm: 0
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated

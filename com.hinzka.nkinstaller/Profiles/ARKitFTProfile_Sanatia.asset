@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ARKitFTProfile_Sanatia
   m_EditorClassIdentifier: 
   avatarMatchTag: "Sanatia,\u30B5\u30CA\u30C6\u30A3\u30A2"
+  shopName: "\u3075\u304B\u3093\u3058\u5C4B / \u3075\u304B\u3093\u3058\u3083\u308A\u3089"
+  versionName: ver1.12
   faceSMRPath: Body
   arkitShapePrefix: 
   ueFallbackEnabled: 0
@@ -23,18 +25,33 @@ MonoBehaviour:
   eyeSMRPath: 
   squintShapeNames:
   - eye_joy
-  gestureLayerIndices: 0800000009000000
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 08000000090000000a000000
   gestureLayerNames:
   - '[ USER EDIT ] FACE EMOTE PLAYER'
   - '[ USER EDIT ] FACE EMOTE OVERRIDE'
-  gestureSuppressOnEyesOrMouth: 0
+  - BLINK
   generateVisemeCompensation: 1
   visemeScale: 1
   generateEyeLookShapes: 1
   eyeLookIntensity: 1
   disableNativeEyeLook: 0
+  blinkControlMode: 0
   generateBrowAssistShapes: 0
   browAssistIntensity: 0.5
+  generateTongueAssistShapes: 0
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: mouth_tang_up
+  tongueExistingLiftShapeWeight: 20
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
   addBlinkEffect: 0
   blinkEffectClip: {fileID: 0}
-  outputFolder: Assets/hinzka_FaceTracking_ARKit_Generated
+  outputFolder: Assets/NK_Installer_Generated
