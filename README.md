@@ -7,12 +7,33 @@ VCC / VPM からインストールして使用できます。
 ※VRChatでフェイストラッキングを利用するには別途VRCFTが必要です。VRChat公式のSelfie Expression（Webカメラトラッキング）では動作しません。
 
 同期するExpression Parametersの消費数は151です。（一部のシェイプキーが欠落していたり、シェイプキー名の登録だけで中身が空だった場合、検知してその分のパラメータを節約します。）
-
+　　
 ## Installation
 
 VCC（VRChat Creator Companion）にVPMリポジトリを追加し、対象のUnityプロジェクトへ **NK Installer** をインストールしてください。
 
 [📦 Add NK Installer to VCC](https://hinzka.github.io/NK-Installer/)
+
+　　
+
+
+
+
+## ドキュメント
+
+- [機能概要](docs/nk_installer_overview.md) — NK Installerでできることの全体像
+- [使い方マニュアル](docs/nk_installer_usage_manual.md) — Profile作成済み/未作成それぞれの操作手順
+
+### 各機能の詳細解説
+
+- [ジェスチャー/メニュー表情の抑制](docs/gesture_suppression_explanation.md)
+- [Viseme打消しシェイプキー生成](docs/viseme_compensation_explanation.md)
+- [目線シェイプキー生成](docs/eyelook_shapekey_explanation.md)
+- [舌アシスト](docs/tongue_assist_explanation.md)
+
+　　
+
+
 
 ## Requirements
 
