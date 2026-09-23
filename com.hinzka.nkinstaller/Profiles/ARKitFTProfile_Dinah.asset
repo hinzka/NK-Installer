@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_Dinah
+  m_EditorClassIdentifier: 
+  avatarMatchTag: "Dinah,\u30C0\u30A4\u30CA"
+  shopName: "yuufyu / \u3086\u3046\u3075\u3086"
+  versionName: v1.0.2
+  templateSetFolderPath: Assets/hinzka_FaceTracking/ARKitInstaller/Templates/1_Satndard
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 0
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - Eye_Smile
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 0800000009000000
+  gestureLayerNames:
+  - '[ USER EDIT ] FACE EMOTE PLAYER'
+  - BLINK
+  generateVisemeCompensation: 1
+  visemeScale: 1
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  eyeLookStageCount: 3
+  disableNativeEyeLook: 1
+  blinkControlMode: 0
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.5
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 0
+  tongueExistingLiftShapeName: Mouth_Tongue_Up
+  tongueExistingLiftShapeWeight: 30
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 0
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 1
+  tonguePreviewPointScale: 0.08
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/NK_Installer_Generated

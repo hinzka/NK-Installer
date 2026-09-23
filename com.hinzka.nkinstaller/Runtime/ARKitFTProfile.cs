@@ -72,6 +72,12 @@ namespace hinzka.FaceTracking
                  "どのバージョン向けかを目視で確認しやすくするためのもの。")]
         public string versionName = "";
 
+        [Tooltip("このProfileが使用するテンプレートセット(ARKit_FT_Template.controller等の組)が\n" +
+                 "置かれているフォルダのパス。複数のテンプレートセットが用意されている場合のみ\n" +
+                 "意味を持つ。空の場合は、プロジェクト全体からの名前検索にフォールバックする\n" +
+                 "(単一セットのみの環境との後方互換)。")]
+        public string templateSetFolderPath = "";
+
         [Header("顔メッシュ")]
         [Tooltip("FXアニメーションが参照するSMRのヒエラルキーパス (例: Body)")]
         public string faceSMRPath = "Body";
@@ -141,6 +147,11 @@ namespace hinzka.FaceTracking
                  "AvatarDescriptorの角度まで届かないことが多い場合に上げる。")]
         public float eyeLookIntensity = 1f;
 
+        [Tooltip("視線シェイプキーをベイクする際、rest姿勢から到達姿勢までの回転を何段階に分けて" +
+                 "Slerp近似するか。1(既定)は従来通りの直線補間、値を大きくすると回転角の大きい" +
+                 "シェイプ(デフォルメアバターの目等)で、回転の弧をより正確に再現できる。")]
+        public int eyeLookStageCount = 3;
+
         [Tooltip("AvatarDescriptorのEye Look機能自体を無効化するか。" +
                  "ジェスチャー表情の抑制だけでは競合を解消しきれない場合の最終手段。" +
                  "トレードオフとして、FTオフ時に目が全く動かなくなる。")]
@@ -152,6 +163,12 @@ namespace hinzka.FaceTracking
                  "方は自動的に無効化される(専用レイヤーがあればweight=0、Driverへ直接注入されている\n" +
                  "場合は該当ノードを除去)。テンプレートが片方の方式しか持たない場合は無視される。")]
         public BlinkControlMode blinkControlMode = BlinkControlMode.TwoD;
+
+        [Tooltip("ONにすると、左右のまばたきを片方の目のトラッキング値だけで完全に同期させる。\n" +
+                 "もう片方の目の独立した開閉(ウインク等)は再現されなくなる。")]
+        public bool syncBlinkLeftRight = false;
+        [Tooltip("syncBlinkLeftRightが有効な場合、true=右目・false=左目のトラッキング値を採用する。")]
+        public bool syncBlinkUseRightAsSource = false;
 
         [Header("眉アシスト")]
         [Tooltip("眉トラッキング非搭載デバイス向けに、標準ARKit眉シェイプキー(browInnerUp等)を複製した" +

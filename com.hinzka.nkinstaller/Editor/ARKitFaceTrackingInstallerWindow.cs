@@ -126,6 +126,35 @@ namespace hinzka.FaceTracking.Editor
             ["表情メッシュと目メッシュが別々"] = new[] { "Face mesh and eye mesh are separate", "表情网格与眼部网格是分离的", "표정 메시와 눈 메시가 분리됨" },
             ["にっこり目"] = new[] { "Smile Eyes", "笑眼", "스마일 아이" },
             ["任意のシェイプキーを「にっこり目」として指定できます。\n未指定の場合はARKitのeyeSquintLeft・eyeSquintRightが設定されます。"] = new[] { "You can designate any shape key as \"Smile Eyes\".\nIf left unspecified, ARKit's eyeSquintLeft/eyeSquintRight will be used.", "可以将任意形态键指定为“笑眼”。\n如果未指定，将使用ARKit的eyeSquintLeft・eyeSquintRight。", "임의의 쉐이프 키를 \"스마일 아이\"로 지정할 수 있습니다.\n지정하지 않으면 ARKit의 eyeSquintLeft・eyeSquintRight가 사용됩니다。" },
+            ["視線ベイク分割数"] = new[] { "Eye Bake Stages", "视线烘焙分段数", "시선 베이크 분할 수" },
+            ["テンプレートセット"] = new[] { "Template Set", "模板集", "템플릿 세트" },
+            ["左右のまばたきを完全に同期させる"] = new[] {
+                "Fully sync left/right blinking", "完全同步左右眨眼", "좌우 눈 깜빡임을 완전히 동기화"
+            },
+            ["ONにすると、片方の目のトラッキング値だけを使って両目を同じタイミング・同じ量で開閉させます。左右の開閉タイミングがズレるのが気になる場合に使ってください。\nもう片方の目の独立した動き(ウインク等)は再現されなくなります。"] = new[] {
+                "When on, both eyes open and close with the same timing and amount, using only one eye's tracking value. Use this if you're bothered by the left/right timing being out of sync.\nThe other eye's independent movement (such as winking) will no longer be reproduced.",
+                "开启后，仅使用一只眼睛的追踪数值，让双眼以相同的时机和幅度开闭。如果在意左右开闭时机不一致，可以使用此选项。\n另一只眼睛的独立动作(如眨单眼)将不再被还原。",
+                "켜면 한쪽 눈의 트래킹 값만 사용하여 양쪽 눈이 같은 타이밍・같은 양으로 개폐됩니다. 좌우 개폐 타이밍이 어긋나는 것이 신경 쓰일 때 사용하세요.\n반대쪽 눈의 독립적인 움직임(윙크 등)은 더 이상 재현되지 않습니다."
+            },
+            ["採用する目"] = new[] { "Source Eye", "采用的眼睛", "채택할 눈" },
+            ["左目"] = new[] { "Left Eye", "左眼", "왼쪽 눈" },
+            ["右目"] = new[] { "Right Eye", "右眼", "오른쪽 눈" },
+            ["同期パラメータ：{0}bit"] = new[] { "Synced params: {0}bit", "同步参数：{0}bit", "동기화 파라미터：{0}bit" },
+            ["同期パラメータ数を取得できませんでした"] = new[] {
+                "Could not retrieve synced parameter count",
+                "无法获取同步参数数量",
+                "동기화 파라미터 수를 가져올 수 없습니다"
+            },
+            ["目線シェイプキーをベイクする際、rest姿勢(正面)から到達姿勢(見た方向)までの回転を、何段階に分けて近似するかを指定します。\n1(既定)は従来通り、rest→到達の2点間を直線で結ぶだけの近似です。\n値を大きくすると、その間に中間姿勢を追加でベイクし、回転の弧(円弧軌道)をより正確に再現します。特に目の可動域が大きいデフォルメアバターで、視線を動かした際の見た目の破綻が軽減されます。\n実行時の負荷はほぼ変わりません(SkinnedMeshRendererは常に隣接する2フレーム間だけを補間するため)。メッシュのデータサイズは段階数にほぼ比例して増えます。\nまず3程度から試すことをお勧めします。"] = new[] {
+                "Specifies how many stages to split the rotation into when baking eye-look shape keys, from the rest pose (facing forward) to the target pose (looking direction).\n1 (default) is the same as before: a simple straight-line approximation between the rest and target points.\nHigher values bake additional intermediate poses in between, more accurately reproducing the arc of rotation. This especially reduces visual glitches when moving the gaze on deformed avatars with a large eye range of motion.\nRuntime cost barely changes (SkinnedMeshRenderer always interpolates between only the two adjacent frames). Mesh data size increases roughly in proportion to the stage count.\nWe recommend starting around 3.",
+                "烘焙视线形态键时，指定将从rest姿势(正面)到目标姿势(视线方向)之间的旋转分成几个阶段来近似。\n1(默认)与以往相同,只是rest与目标两点之间的直线近似。\n数值越大，会在中间额外烘焙中间姿势,更准确地还原旋转的弧线(圆弧轨迹)。尤其是在眼睛可动范围较大的Q版化身上，移动视线时的形状崩坏会得到缓解。\n运行时负荷几乎不变(SkinnedMeshRenderer始终只在相邻的两帧之间插值)。网格数据大小会大致与阶段数成比例增加。\n建议先从3左右开始尝试。",
+                "시선 쉐이프 키를 베이크할 때, rest 자세(정면)에서 도달 자세(시선 방향)까지의 회전을 몇 단계로 나누어 근사할지 지정합니다.\n1(기본값)은 기존과 동일하게 rest→도달 두 점 사이를 직선으로 잇는 근사입니다.\n값을 크게 하면 그 사이에 중간 자세를 추가로 베이크하여, 회전의 호(원호 궤도)를 더 정확하게 재현합니다. 특히 눈의 가동 범위가 큰 디포르메 아바타에서, 시선을 움직였을 때의 형태 붕괴가 줄어듭니다.\n실행 시 부하는 거의 변하지 않습니다(SkinnedMeshRenderer는 항상 인접한 두 프레임 사이만 보간하기 때문입니다). 메시 데이터 크기는 단계 수에 거의 비례하여 증가합니다.\n먼저 3 정도부터 시도해 보는 것을 추천합니다."
+            },
+            ["目線の回転が大きいと、生成したシェイプキーの中間形状が歪むことがあります。中間シェイプキーを増やすことで、本来の回転に近づけることができます。"] = new[] {
+                "If the eye rotation is large, the in-between shape of the generated shape key can look distorted. Adding more intermediate shape keys brings it closer to the true rotation.",
+                "当眼睛旋转角度较大时，生成的形态键中间形状可能会变形。通过增加中间形态键，可以使其更接近原本的旋转。",
+                "눈의 회전이 크면 생성된 쉐이프 키의 중간 형태가 일그러질 수 있습니다. 중간 쉐이프 키를 늘리면 본래의 회전에 더 가깝게 만들 수 있습니다."
+            },
             ["アバターを選択するとShape Keyを指定できます。"] = new[] { "Select an avatar to specify Shape Keys.", "选择角色后即可指定Shape Key。", "아바타를 선택하면 Shape Key를 지정할 수 있습니다." },
             ["検索"] = new[] { "Search", "搜索", "검색" },
             ["＋ Shape Keyを追加"] = new[] { "+ Add Shape Key", "＋ 添加Shape Key", "+ Shape Key 추가" },
@@ -417,6 +446,9 @@ namespace hinzka.FaceTracking.Editor
         private Transform _rightEyeConstraintTarget;
         private bool _disableNativeEyeLook = false; // false=標準Eye Lookを維持、true=無効化(ラジオボタンで選択)
         private float _eyeLookIntensity = 1f;
+        // 目線シェイプキーのベイク時、rest→target間を何段階に分けてSlerpするか(1=多段化なし・
+        // 従来通りの直線補間。値が大きいほど、回転角の大きいシェイプで弧を正確に近似できる)。
+        private int _eyeLookStageCount = 3;
         // 目線シェイプキー生成(ボーン回転のベイク)時、あらかじめ重み100で有効にしておく
         // 追加シェイプキー(_shapeNamesのインデックス、複数選択可)。目のハイライト・瞳孔等の
         // サブメッシュを手前に移動させるシェイプキーを持つアバターで、そのシェイプキーを
@@ -455,9 +487,15 @@ namespace hinzka.FaceTracking.Editor
         private int _estimatedTotalParamBits = 0;
         private int _estimatedExistingParamBits = 0;
         private int _estimatedFtParamBits = 0;
+        private int _estimatedFtParamCount = 0;
         private bool _estimatedParamBitsOverBudget = false;
         private bool _disableSyncForEmptyShapes = false;
         private ArkitShapeParameterMap _shapeParameterMap;
+        // 選択中のテンプレートセット(FX/Parameters/Menu/ShapeParamMapの組)が置かれているフォルダ。
+        // 空文字列の場合は「セットが1つも見つからない、または未選択」を意味し、
+        // 後方互換としてプロジェクト全体からの名前検索(FindTemplate)にフォールバックする。
+        private string _selectedTemplateSetFolder = "";
+        private List<TemplateSetOption> _availableTemplateSets = new List<TemplateSetOption>();
         private string[] _fxLayerNames = Array.Empty<string>();
         private List<string> _eyeTrackingControlLayerNames = new List<string>();
         private string _gestureSearchQuery = "";
@@ -472,6 +510,10 @@ namespace hinzka.FaceTracking.Editor
         // まばたき制御方式(Blink2D / Blink Simple 1D)。テンプレートFXに両方式が同梱されている
         // 場合、Install時に選択されなかった方を無効化する。
         private BlinkControlMode _blinkControlMode = BlinkControlMode.TwoD;
+        // 左右のまばたきを、片方の目のトラッキング値だけで同期させるかどうか。
+        private bool _syncBlinkLeftRight = false;
+        // trueなら右目、falseなら左目のトラッキング値を両目に採用する。
+        private bool _syncBlinkUseRightAsSource = false;
 
         // 眉アシスト
         private bool _generateBrowAssistShapes = false;
@@ -538,6 +580,10 @@ namespace hinzka.FaceTracking.Editor
         private VisualElement _uiAvatarMatchTagRow;
         private TextField _uiProfileShopNameField;
         private TextField _uiProfileVersionNameField;
+        private VisualElement _uiTemplateSetRow;
+        private DropdownField _uiTemplateSetField;
+        private VisualElement _uiTemplateSetHint;
+        private Label _uiTemplateSetParamCountLabel;
         private VisualElement _uiProfileMetaRow;
         private VisualElement _uiProfileReadyBanner;
         private Label _uiProfileReadyBannerLabel;
@@ -584,10 +630,14 @@ namespace hinzka.FaceTracking.Editor
         private VisualElement _uiBlinkModeCard;
         private Toggle _uiBlinkSimple1DToggle;
         private VisualElement _uiBlinkModeHint;
+        private Toggle _uiSyncBlinkToggle;
+        private DropdownField _uiSyncBlinkSourceField;
 
         private Toggle _uiEyeLookToggle;
         private Slider _uiEyeLookSlider;
         private FloatField _uiEyeLookValue;
+        private SliderInt _uiEyeLookStageCountSlider;
+        private IntegerField _uiEyeLookStageCountValue;
         private VisualElement _uiEyeLookDetail;
         private Toggle _uiEyeConstraintToggle;
         private VisualElement _uiEyeConstraintFields;
@@ -802,9 +852,9 @@ namespace hinzka.FaceTracking.Editor
         private static readonly string[] TONGUE_LIP_EXCLUDE_SHAPES =
             { "mouthRollUpper", "mouthRollLower", "cheekPuff" };
         // TongueOutSteps_BT配下の専用クリップ名の接頭辞。標準の汎用Binding
-        // (hinzkaUE_Bind_v2_TongueOut等)と区別するために使う。
-        private const string TONGUE_STEP_CLIP_PREFIX = "hinzkaUE_TongueStep_";
-        private const string TONGUE_GAIN_TREE_NAME = "hinzkaUE_Gain_v2_TongueOut";
+        // (hinzkaNK_Bind_v2_TongueOut等)と区別するために使う。
+        private const string TONGUE_STEP_CLIP_PREFIX = "hinzkaNK_TongueStep_";
+        private const string TONGUE_GAIN_TREE_NAME = "hinzkaNK_Gain_v2_TongueOut";
         // 標準の舌駆動BlendTree(UEFxGeneratorが全ARKitシェイプ共通で生成する、汎用の
         // "Gain_v2_<パラメータ名>"命名規則のtongueOut版)の固定名。持ち上げエンベロープを
         // 組み込む際、このBlendTreeをfx内から名前で探して直接組み替える。
@@ -812,8 +862,8 @@ namespace hinzka.FaceTracking.Editor
         // ── まばたき制御方式(Blink2D / Blink Simple 1D) ──────────────────
         // UEFxGeneratorのUEFxGenConfigデフォルト命名規則に合わせた、専用レイヤー名。
         // LegacySeparateLayer配置の場合、この名前のレイヤーが見つかれば無効化対象にする。
-        private const string BLINK_2D_LAYER_NAME = "UE_Blink2D";
-        private const string BLINK_SIMPLE1D_LAYER_NAME = "UE_BlinkSimple1D";
+        private const string BLINK_2D_LAYER_NAME = "NK_Blink2D";
+        private const string BLINK_SIMPLE1D_LAYER_NAME = "NK_BlinkSimple1D";
         // InMainDriverDirect配置(Direct BlendTreeへの直接注入)の場合、Direct BlendTreeの
         // 子Motionの名前にこの文字列が含まれていれば無効化対象にする
         // (BrowModeSwitch/Modulationでラップされていない、素の状態でのみ確実に検出できる)。
@@ -829,10 +879,23 @@ namespace hinzka.FaceTracking.Editor
 
         private void OnEnable()
         {
+            // テンプレートセット(複数用意されている場合、フォルダ単位で切り替えられる)を発見する。
+            // 1つも見つからない場合は、従来通りプロジェクト全体からの名前検索にフォールバックする
+            // (単一セットのみを配置している既存ユーザーとの後方互換のため)。
+            _availableTemplateSets = DiscoverTemplateSets();
+            _selectedTemplateSetFolder = _availableTemplateSets.Count > 0 ? _availableTemplateSets[0].folderPath : "";
+
             // ARKitシェイプ⇔OSCmoothパラメータの対応表(開発者側でFXジェネレータから生成・配置済み)を
             // 自動で読み込む。エンドユーザーが指定する必要はない。見つからなければnullのままで、
             // その場合は部分一致による判定にフォールバックする。
-            _shapeParameterMap = FindTemplate<ArkitShapeParameterMap>("ARKit_FT_ShapeParamMap.asset");
+            _shapeParameterMap = !string.IsNullOrEmpty(_selectedTemplateSetFolder)
+                ? FindTemplateInFolder<ArkitShapeParameterMap>(_selectedTemplateSetFolder, "NK_FT_ShapeParamMap.asset")
+                : FindTemplate<ArkitShapeParameterMap>("NK_FT_ShapeParamMap.asset");
+
+            // ウィンドウを開いた時点(まだアバター未選択の可能性もある)でも、テンプレート自体の
+            // パラメータ数/bit数をプルダウンの下に表示できるよう、ここでも計算しておく。
+            RefreshParameterBudgetEstimate();
+
             SceneView.duringSceneGui += OnTongueSceneGUI;
         }
 
@@ -1191,6 +1254,57 @@ namespace hinzka.FaceTracking.Editor
             _uiProfileMetaRow = metaRow;
             hero.Add(metaRow);
 
+            // テンプレートセット(FX/Parameters/Menu/ShapeParamMapの組)が複数用意されている
+            // 場合のみ、選択用のドロップダウンを表示する。1つしか無い場合は選ぶ意味が無いため
+            // 非表示にする(単一セットのみを配置している既存ユーザーには何も変わって見えない)。
+            var templateSetRow = new VisualElement();
+            templateSetRow.AddToClassList("toolbar-row");
+            templateSetRow.style.flexDirection = FlexDirection.Row;
+
+            // ドロップダウン本体は1行分の高さしかない一方、右側の概要テキストが2行になると
+            // ドロップダウンの下に1行分の余白ができる。この余白へ、同期パラメータのbit数を
+            // 小さく添える(別行に大きな箱を作らない)。
+            var templateSetLeftColumn = new VisualElement();
+            templateSetLeftColumn.style.flexGrow = 1;
+            templateSetLeftColumn.style.flexShrink = 1;
+            templateSetLeftColumn.style.flexBasis = 0;
+
+            _uiTemplateSetField = new DropdownField(ArkitFTLoc.T("テンプレートセット"));
+            _uiTemplateSetField.RegisterValueChangedCallback(evt =>
+            {
+                var chosen = _availableTemplateSets.FirstOrDefault(s => s.displayName == evt.newValue);
+                _selectedTemplateSetFolder = chosen?.folderPath ?? "";
+                // テンプレートセットを切り替えると、参照するNK_FT_Parameters.assetも変わるため、
+                // bit予算の見積りを再計算する(以前はここが抜けており、切り替え後も直前の
+                // セットの見積りが残ったままになっていた)。
+                RefreshParameterBudgetEstimate();
+                RefreshToolkitUI();
+            });
+            templateSetLeftColumn.Add(_uiTemplateSetField);
+
+            _uiTemplateSetParamCountLabel = new Label("");
+            _uiTemplateSetParamCountLabel.style.marginTop = 2;
+            _uiTemplateSetParamCountLabel.style.color = new StyleColor(new Color(0.6f, 0.6f, 0.6f));
+            // ドロップダウン内蔵ラベル("テンプレートセット")の実際の描画幅と揃うよう、
+            // 左マージンを動的に同期する(固定値だとテーマ・言語切替で値の開始位置とズレるため)。
+            _uiTemplateSetField.labelElement.RegisterCallback<GeometryChangedEvent>(evt =>
+            {
+                // ラベル文字自体の幅に加えて、ラベルと値の間の内部余白(Unity標準フィールドの
+                // label-input間ギャップ)の分だけ足りないため、少し余分に足す。
+                _uiTemplateSetParamCountLabel.style.marginLeft = evt.newRect.width + 6f;
+            });
+            templateSetLeftColumn.Add(_uiTemplateSetParamCountLabel);
+
+            templateSetRow.Add(templateSetLeftColumn);
+
+            _uiTemplateSetHint = MakeHint("", "soft");
+            _uiTemplateSetHint.style.flexGrow = 1;
+            _uiTemplateSetHint.style.flexShrink = 1;
+            _uiTemplateSetHint.style.flexBasis = 0;
+            templateSetRow.Add(_uiTemplateSetHint);
+            _uiTemplateSetRow = templateSetRow;
+            hero.Add(templateSetRow);
+
             _uiHeaderHost.Add(hero);
 
             // Profileが読み込まれている場合、「このままInstallできます」という目立つ帯を
@@ -1547,6 +1661,26 @@ namespace hinzka.FaceTracking.Editor
             eyeSliderRow.name = "eye-strength-row";
             _uiEyeLookDetail.Add(eyeSliderRow);
 
+            var eyeStageCountRow = MakeIntSlider(
+                ArkitFTLoc.T("視線ベイク分割数"), 1, 8,
+                out _uiEyeLookStageCountSlider, out _uiEyeLookStageCountValue,
+                value => _eyeLookStageCount = value);
+            eyeStageCountRow.name = "eye-stage-count-row";
+            string eyeLookStageCountTooltip = ArkitFTLoc.T(
+                "目線シェイプキーをベイクする際、rest姿勢(正面)から到達姿勢(見た方向)までの回転を、何段階に分けて近似するかを指定します。\n" +
+                "1(既定)は従来通り、rest→到達の2点間を直線で結ぶだけの近似です。\n" +
+                "値を大きくすると、その間に中間姿勢を追加でベイクし、回転の弧(円弧軌道)をより正確に再現します。特に目の可動域が大きいデフォルメアバターで、視線を動かした際の見た目の破綻が軽減されます。\n" +
+                "実行時の負荷はほぼ変わりません(SkinnedMeshRendererは常に隣接する2フレーム間だけを補間するため)。メッシュのデータサイズは段階数にほぼ比例して増えます。\n" +
+                "まず3程度から試すことをお勧めします。");
+            eyeStageCountRow.tooltip = eyeLookStageCountTooltip;
+            _uiEyeLookStageCountSlider.tooltip = eyeLookStageCountTooltip;
+            _uiEyeLookStageCountValue.tooltip = eyeLookStageCountTooltip;
+            _uiEyeLookDetail.Add(eyeStageCountRow);
+            _uiEyeLookDetail.Add(MakeHint(
+                ArkitFTLoc.T("目線の回転が大きいと、生成したシェイプキーの中間形状が歪むことがあります。" +
+                "中間シェイプキーを増やすことで、本来の回転に近づけることができます。"),
+                "soft"));
+
             _uiEyeLookDetail.Add(MakeHint(
                 ArkitFTLoc.T("フェイストラッキングで動く目線のシェイプキーを、アバターのEyeLook設定から自動生成します。\n" +
                 "EyeLook Strengthを大きくするとわずかな動きにも敏感に反応します。\n" +
@@ -1733,6 +1867,29 @@ namespace hinzka.FaceTracking.Editor
                 "綺麗にウインクするには、反対の目が一定以上開いている必要があります。"),
                 "soft");
             card.Add(_uiBlinkModeHint);
+
+            // 左右まばたき完全同期(片方の目のトラッキング値だけで両目を揃える)。
+            // 上のBlink2D/Simple1D選択とは独立した、追加のオプション。
+            _uiSyncBlinkToggle = new Toggle(ArkitFTLoc.T("左右のまばたきを完全に同期させる"));
+            _uiSyncBlinkToggle.tooltip =
+                ArkitFTLoc.T("ONにすると、片方の目のトラッキング値だけを使って両目を同じタイミング・同じ量で" +
+                "開閉させます。左右の開閉タイミングがズレるのが気になる場合に使ってください。\n" +
+                "もう片方の目の独立した動き(ウインク等)は再現されなくなります。");
+            _uiSyncBlinkToggle.RegisterValueChangedCallback(evt =>
+            {
+                _syncBlinkLeftRight = evt.newValue;
+                RefreshToolkitUI();
+            });
+            card.Add(_uiSyncBlinkToggle);
+
+            _uiSyncBlinkSourceField = new DropdownField(
+                ArkitFTLoc.T("採用する目"),
+                new List<string> { ArkitFTLoc.T("左目"), ArkitFTLoc.T("右目") }, 0);
+            _uiSyncBlinkSourceField.RegisterValueChangedCallback(evt =>
+            {
+                _syncBlinkUseRightAsSource = (evt.newValue == ArkitFTLoc.T("右目"));
+            });
+            card.Add(_uiSyncBlinkSourceField);
 
             _uiTrackingPage.Add(card);
         }
@@ -3039,6 +3196,33 @@ namespace hinzka.FaceTracking.Editor
                 _uiProfileMetaRow.style.display = _profile != null ? DisplayStyle.Flex : DisplayStyle.None;
             _uiAvatarField?.SetValueWithoutNotify(_avatarPrefab);
 
+            // テンプレートセットが2つ以上ある場合のみ選択UIを表示する。
+            if (_uiTemplateSetRow != null)
+            {
+                bool showSetSelector = _availableTemplateSets.Count > 1;
+                _uiTemplateSetRow.style.display = showSetSelector ? DisplayStyle.Flex : DisplayStyle.None;
+                if (showSetSelector && _uiTemplateSetField != null)
+                {
+                    var names = _availableTemplateSets.Select(s => s.displayName).ToList();
+                    _uiTemplateSetField.choices = names;
+                    var current = _availableTemplateSets.FirstOrDefault(s => s.folderPath == _selectedTemplateSetFolder);
+                    _uiTemplateSetField.SetValueWithoutNotify(current?.displayName ?? (names.Count > 0 ? names[0] : ""));
+                    if (_uiTemplateSetHint != null && _uiTemplateSetHint.childCount > 0 &&
+                        _uiTemplateSetHint[0] is Label setHintLabel)
+                        setHintLabel.text = current?.description ?? "";
+                }
+            }
+
+            // 選択中テンプレートの同期パラメータ数(個数・bit数)を表示する。
+            // テンプレートセットのプルダウンが1つしかなく非表示の場合でも、この行だけは表示する
+            // (単一セット環境でも、テンプレートが実際に何bit使うのかは有用な情報のため)。
+            if (_uiTemplateSetParamCountLabel != null)
+            {
+                _uiTemplateSetParamCountLabel.text = _estimatedFtParamCount > 0
+                    ? string.Format(ArkitFTLoc.T("同期パラメータ：{0}bit"), _estimatedFtParamBits)
+                    : ArkitFTLoc.T("同期パラメータ数を取得できませんでした");
+            }
+
             // Profileが読み込まれていれば、上部の帯で状態を案内する。ダミーファイル等、
             // 顔まわりのデータが実質何も無いアバターの場合は「このままInstallできます」と
             // 案内してしまうと誤解を招くため、警告表示に切り替える。
@@ -3148,6 +3332,8 @@ namespace hinzka.FaceTracking.Editor
             _uiEyeLookToggle?.SetValueWithoutNotify(_generateEyeLookShapes);
             _uiEyeLookSlider?.SetValueWithoutNotify(_eyeLookIntensity);
             _uiEyeLookValue?.SetValueWithoutNotify(_eyeLookIntensity);
+            _uiEyeLookStageCountSlider?.SetValueWithoutNotify(_eyeLookStageCount);
+            _uiEyeLookStageCountValue?.SetValueWithoutNotify(_eyeLookStageCount);
             if (_uiEyeLookDetail != null)
                 _uiEyeLookDetail.style.display = _generateEyeLookShapes ? DisplayStyle.Flex : DisplayStyle.None;
             if (_uiEyeLookConfigWarningHint != null)
@@ -3162,6 +3348,11 @@ namespace hinzka.FaceTracking.Editor
             _uiBlinkSimple1DToggle?.SetValueWithoutNotify(_blinkControlMode == BlinkControlMode.TwoD);
             if (_uiBlinkModeHint != null)
                 _uiBlinkModeHint.style.display = (_blinkControlMode == BlinkControlMode.TwoD) ? DisplayStyle.Flex : DisplayStyle.None;
+
+            _uiSyncBlinkToggle?.SetValueWithoutNotify(_syncBlinkLeftRight);
+            _uiSyncBlinkSourceField?.SetValueWithoutNotify(_syncBlinkUseRightAsSource ? ArkitFTLoc.T("右目") : ArkitFTLoc.T("左目"));
+            if (_uiSyncBlinkSourceField != null)
+                _uiSyncBlinkSourceField.style.display = _syncBlinkLeftRight ? DisplayStyle.Flex : DisplayStyle.None;
 
             _uiEyeConstraintToggle?.SetValueWithoutNotify(_eyeUsesConstraint);
             _uiEyeConstraintToggle?.SetEnabled(_generateEyeLookShapes);
@@ -3659,11 +3850,25 @@ namespace hinzka.FaceTracking.Editor
             _profileShopName = _profile.shopName ?? "";
             _profileVersionName = _profile.versionName ?? "";
 
+            // テンプレートセット: Profileに保存されたフォルダパスが、現在発見できているセットの
+            // いずれかと一致すればそれを選択する。見つからない場合(フォルダが移動・削除された等)は
+            // 警告を出し、現在の選択(既定は先頭のセット)をそのまま維持する。
+            if (!string.IsNullOrEmpty(_profile.templateSetFolderPath))
+            {
+                if (_availableTemplateSets.Any(s => s.folderPath == _profile.templateSetFolderPath))
+                    _selectedTemplateSetFolder = _profile.templateSetFolderPath;
+                else
+                    Debug.LogWarning($"[hinzka ARKit FT] Profileが指定するテンプレートセット " +
+                        $"'{_profile.templateSetFolderPath}' が見つからないため、既定のセットを使用します。");
+            }
+
             // アバターに依存しない項目は常に適用
             _generateVisemeCompensation = _profile.generateVisemeCompensation;
             _visemeScale = _profile.visemeScale;
             _generateEyeLookShapes = _profile.generateEyeLookShapes;
             _blinkControlMode = _profile.blinkControlMode;
+            _syncBlinkLeftRight = _profile.syncBlinkLeftRight;
+            _syncBlinkUseRightAsSource = _profile.syncBlinkUseRightAsSource;
             _generateBrowAssistShapes = _profile.generateBrowAssistShapes;
             _browAssistIntensity = _profile.browAssistIntensity;
             _generateTongueAssistShapes = _profile.generateTongueAssistShapes;
@@ -3681,6 +3886,7 @@ namespace hinzka.FaceTracking.Editor
             _addBlinkEffect = _profile.addBlinkEffect;
             _blinkEffectClip = _profile.blinkEffectClip;
             _eyeLookIntensity = _profile.eyeLookIntensity;
+            _eyeLookStageCount = _profile.eyeLookStageCount;
             _disableNativeEyeLook = _profile.disableNativeEyeLook;
             _outputFolder = _profile.outputFolder;
 
@@ -3782,6 +3988,7 @@ namespace hinzka.FaceTracking.Editor
             _profile.avatarMatchTag = _avatarMatchTag ?? "";
             _profile.shopName = _profileShopName ?? "";
             _profile.versionName = _profileVersionName ?? "";
+            _profile.templateSetFolderPath = _selectedTemplateSetFolder ?? "";
 
             _profile.faceSMRPath = _smrIndex < _smrPaths.Length ? _smrPaths[_smrIndex] : "";
             _profile.arkitShapePrefix = _arkitShapePrefix;
@@ -3821,6 +4028,8 @@ namespace hinzka.FaceTracking.Editor
             _profile.visemeScale = _visemeScale;
             _profile.generateEyeLookShapes = _generateEyeLookShapes;
             _profile.blinkControlMode = _blinkControlMode;
+            _profile.syncBlinkLeftRight = _syncBlinkLeftRight;
+            _profile.syncBlinkUseRightAsSource = _syncBlinkUseRightAsSource;
             _profile.generateBrowAssistShapes = _generateBrowAssistShapes;
             _profile.browAssistIntensity = _browAssistIntensity;
             _profile.generateTongueAssistShapes = _generateTongueAssistShapes;
@@ -3838,6 +4047,7 @@ namespace hinzka.FaceTracking.Editor
             _profile.addBlinkEffect = _addBlinkEffect;
             _profile.blinkEffectClip = _blinkEffectClip;
             _profile.eyeLookIntensity = _eyeLookIntensity;
+            _profile.eyeLookStageCount = _eyeLookStageCount;
             _profile.disableNativeEyeLook = _disableNativeEyeLook;
             _profile.outputFolder = _outputFolder;
 
@@ -4436,18 +4646,25 @@ namespace hinzka.FaceTracking.Editor
             _estimatedTotalParamBits = 0;
             _estimatedExistingParamBits = 0;
             _estimatedFtParamBits = 0;
+            _estimatedFtParamCount = 0;
             _estimatedParamBitsOverBudget = false;
+
+            // テンプレート自体のパラメータ数/bit数は、アバター未選択でも(プルダウンの下に
+            // 表示するために)常に計算しておく。
+            var templateParams = !string.IsNullOrEmpty(_selectedTemplateSetFolder)
+                ? FindTemplateInFolder<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>(_selectedTemplateSetFolder, "NK_FT_Parameters.asset")
+                : FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>("NK_FT_Parameters.asset");
+            if (templateParams != null)
+            {
+                _estimatedFtParamBits = ComputeVrcParameterBits(templateParams);
+                _estimatedFtParamCount = CountVrcSyncedParameters(templateParams);
+            }
 
             if (_avatarPrefab == null) return;
 
             var desc = _avatarPrefab.GetComponentInChildren<VRC.SDK3.Avatars.Components.VRCAvatarDescriptor>(true);
             if (desc != null)
                 _estimatedExistingParamBits = ComputeVrcParameterBits(desc.expressionParameters);
-
-            var templateParams = FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>(
-                "ARKit_FT_Parameters.asset");
-            if (templateParams != null)
-                _estimatedFtParamBits = ComputeVrcParameterBits(templateParams);
 
             _estimatedTotalParamBits = _estimatedExistingParamBits + _estimatedFtParamBits;
             _estimatedParamBitsOverBudget = _estimatedTotalParamBits > VRC_PARAM_BIT_BUDGET;
@@ -4518,7 +4735,7 @@ namespace hinzka.FaceTracking.Editor
         /// 副作用だけを止めたい場合に使う。
         ///
         /// Stable Eye ModeではAvatarDescriptor Eye Look自体を無効化するため、
-        /// UE_FT_AutoStop_EyesからEyes=Animation/Trackingを再主張する必要がない。
+        /// NK_FT_AutoStop_EyesからEyes=Animation/Trackingを再主張する必要がない。
         /// レイヤー丸ごとの削除ではUEFx/FT_EnableEyesのウォッチドッグまで失われるので、
         /// trackingEyesのみNoChangeにする。
         /// </summary>
@@ -4594,7 +4811,7 @@ namespace hinzka.FaceTracking.Editor
         }
 
         /// <summary>
-        /// UE_FT_AutoStop_Eyes の Idle_A / Idle_B の無条件反復を単一Idleへ整理する。
+        /// NK_FT_AutoStop_Eyes の Idle_A / Idle_B の無条件反復を単一Idleへ整理する。
         /// 実機検証で、AvatarDescriptor Eye Lookの有効/無効どちらでもA/B反復を削除して
         /// AutoStop・Eye Look復帰とも問題がないことを確認したため、両モード共通で適用する。
         ///
@@ -5039,7 +5256,9 @@ namespace hinzka.FaceTracking.Editor
             // ウィンドウを開いたまま後からアセットを追加・配置した場合は反映されない。
             // 未検出のままの間はここでも再探索し、次に見つかったタイミングで自動的に拾う。
             if (_shapeParameterMap == null)
-                _shapeParameterMap = FindTemplate<ArkitShapeParameterMap>("ARKit_FT_ShapeParamMap.asset");
+                _shapeParameterMap = !string.IsNullOrEmpty(_selectedTemplateSetFolder)
+                    ? FindTemplateInFolder<ArkitShapeParameterMap>(_selectedTemplateSetFolder, "NK_FT_ShapeParamMap.asset")
+                    : FindTemplate<ArkitShapeParameterMap>("NK_FT_ShapeParamMap.asset");
 
             _missingArkitShapes.Clear();
             _emptyArkitShapes.Clear();
@@ -5238,9 +5457,16 @@ namespace hinzka.FaceTracking.Editor
             }
 
             // テンプレートは複製前に確認する。ここで失敗してもシーンに半端な複製を残さない。
-            var templateFx    = FindTemplate<AnimatorController>("ARKit_FT_Template.controller");
-            var templateMenu  = FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>("ARKit_FT_Menu.asset");
-            var templateParam = FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>("ARKit_FT_Parameters.asset");
+            bool useSetFolder = !string.IsNullOrEmpty(_selectedTemplateSetFolder);
+            var templateFx    = useSetFolder
+                ? FindTemplateInFolder<AnimatorController>(_selectedTemplateSetFolder, "NK_FT_Template.controller")
+                : FindTemplate<AnimatorController>("NK_FT_Template.controller");
+            var templateMenu  = useSetFolder
+                ? FindTemplateInFolder<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>(_selectedTemplateSetFolder, "NK_FT_Menu.asset")
+                : FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu>("NK_FT_Menu.asset");
+            var templateParam = useSetFolder
+                ? FindTemplateInFolder<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>(_selectedTemplateSetFolder, "NK_FT_Parameters.asset")
+                : FindTemplate<VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters>("NK_FT_Parameters.asset");
             if (templateFx == null || templateMenu == null || templateParam == null)
             {
                 EditorUtility.DisplayDialog("Error",
@@ -5321,7 +5547,7 @@ namespace hinzka.FaceTracking.Editor
                     throw new InvalidOperationException(ArkitFTLoc.T("コピーしたFXを読み込めませんでした。"));
 
                 // Stable Eye Mode (AvatarDescriptor Eye Look無効化)では、テンプレートの
-                // UE_FT_AutoStop_Eyes が持つ VRCAnimatorTrackingControl(Eyes=Animation/Tracking)を
+                // NK_FT_AutoStop_Eyes が持つ VRCAnimatorTrackingControl(Eyes=Animation/Tracking)を
                 // 発火させない。AutoStopレイヤー自体を削除すると UEFx/FT_EnableEyes の計算や
                 // Eyeパラメータのリセットまで失われるため、TrackingControlのtrackingEyesだけを
                 // NoChangeへ置き換え、Parameter Driver等のウォッチドッグ機能はそのまま残す。
@@ -5332,13 +5558,13 @@ namespace hinzka.FaceTracking.Editor
                 if (_disableNativeEyeLook)
                 {
                     NeutralizeTrackingControlFieldInLayer(
-                        fx, "UE_FT_AutoStop_Eyes", "trackingEyes");
+                        fx, "NK_FT_AutoStop_Eyes", "trackingEyes");
                 }
 
-                // UE_FT_AutoStop_Eyes の Idle_A / Idle_B 反復は、実機検証で
+                // NK_FT_AutoStop_Eyes の Idle_A / Idle_B 反復は、実機検証で
                 // AvatarDescriptor Eye Lookの有効/無効どちらでも削除して問題ないことを確認済み。
                 // Idle_A側のParameter Driver / TrackingControl等は残したまま単一Idle化する。
-                CollapseEyeAutoStopIdleLoop(fx, "UE_FT_AutoStop_Eyes");
+                CollapseEyeAutoStopIdleLoop(fx, "NK_FT_AutoStop_Eyes");
 
                 string realSmrPath = _smrPaths[_smrIndex];
                 string eyeSmrPath = _eyeSmrSeparate ? _smrPaths[_eyeSmrIndex] : null;
@@ -5500,6 +5726,9 @@ namespace hinzka.FaceTracking.Editor
                 // 同梱されている場合、選択されなかった方をここで無効化する。
                 ApplyBlinkControlModeSelection(fx, _blinkControlMode);
 
+                // 左右まばたき同期(片方の目のトラッキング値で両目を揃える)。
+                ApplySyncBlinkLeftRightIfNeeded(fx, _syncBlinkLeftRight, _syncBlinkUseRightAsSource);
+
                 // 眉アシスト
                 if (_generateBrowAssistShapes)
                 {
@@ -5510,7 +5739,7 @@ namespace hinzka.FaceTracking.Editor
                 // 舌アシスト(検出頂点の持ち上げ + tongueOut本体とのミックス)。
                 // tongueOutの0%→100%遷移の50%地点(唇を越えるタイミング)で持ち上げが
                 // 最大になるピーク形状を生成し、標準の舌駆動BlendTree
-                // (hinzkaUE_Gain_v2_TongueOut)へ組み込む。
+                // (hinzkaNK_Gain_v2_TongueOut)へ組み込む。
                 if (_generateTongueAssistShapes)
                 {
                     // mm(ワールド実寸)で指定された閾値を、このSMRのメッシュ空間の値へ変換する
@@ -6583,7 +6812,7 @@ namespace hinzka.FaceTracking.Editor
             {
                 added = EyeLookBoneToBlendShapeBaker.GenerateMissingShapesAdditive(
                     desc, faceSmr, newMesh, frameWeight, EYELOOK_BONE_PREFIX,
-                    leftConstraintTarget, rightConstraintTarget, out var emptyDeltaNames);
+                    leftConstraintTarget, rightConstraintTarget, out var emptyDeltaNames, _eyeLookStageCount);
                 _lastEyeLookEmptyDeltaShapes = emptyDeltaNames;
             }
             finally
@@ -7220,7 +7449,7 @@ namespace hinzka.FaceTracking.Editor
         /// 最大になるよう舌を持ち上げる「ピーク形状」を1つだけ生成する。
         /// ピーク形状の頂点データには、①持ち上げ量の100%と、②tongueOut本体の伸び50%ぶんが
         /// あらかじめ合成されている。実際の遷移カーブ(0%→50%→100%)はFX側の
-        /// ApplyTongueLiftEnvelopeで、既存の標準舌駆動BlendTree(hinzkaUE_Gain_v2_TongueOut)を
+        /// ApplyTongueLiftEnvelopeで、既存の標準舌駆動BlendTree(hinzkaNK_Gain_v2_TongueOut)を
         /// 組み替えることで実現する(離散的な2ポーズ切り替えではなく、連続的な山型エンベロープ)。
         ///
         /// ①「持ち上げ」の作り方はliftSourceで選べる:
@@ -7410,7 +7639,7 @@ namespace hinzka.FaceTracking.Editor
 
         /// <summary>
         /// v2/TongueOutの0→100%遷移の間、50%地点(唇を越えるタイミング)で舌の持ち上げ
-        /// (peakShapeName)が最大になるよう、標準の舌駆動BlendTree(hinzkaUE_Gain_v2_TongueOut)を
+        /// (peakShapeName)が最大になるよう、標準の舌駆動BlendTree(hinzkaNK_Gain_v2_TongueOut)を
         /// 3点構成(0%=無反応, 50%=持ち上げピーク, 100%=tongueOut本体そのまま・持ち上げ無し)へ
         /// 組み替える。既存の0%・100%用クリップはそのまま再利用し、50%用のクリップだけ新規作成する。
         /// これにより、離散的な2ポーズの切り替えではなく、遷移の後半にかけて持ち上げが自然に
@@ -7463,13 +7692,13 @@ namespace hinzka.FaceTracking.Editor
             // persist上げ量を0へ強制的にリセットしてしまう(「一切動かなくなった」不具合の
             // 直接的な原因と考えられる)。この副作用を避けるため、共有クリップは一切変更せず、
             // 0%地点・100%地点にも専用の新規クリップを作成する(ピーク・中間点と同じ方式)。
-            var startClip = new AnimationClip { name = "hinzkaUE_TongueEnvelope_Start" };
+            var startClip = new AnimationClip { name = "hinzkaNK_TongueEnvelope_Start" };
             AssetDatabase.AddObjectToAsset(startClip, fx);
             startClip.hideFlags = GENERATED_SUBASSET_HIDE_FLAGS;
             SetConstantCurve(startClip, smrPath, bsPrefix + tongueOutPropName, 0f);
             SetConstantCurve(startClip, smrPath, bsPrefix + peakShapeName, 0f);
 
-            var endClip = new AnimationClip { name = "hinzkaUE_TongueEnvelope_End" };
+            var endClip = new AnimationClip { name = "hinzkaNK_TongueEnvelope_End" };
             AssetDatabase.AddObjectToAsset(endClip, fx);
             endClip.hideFlags = GENERATED_SUBASSET_HIDE_FLAGS;
             SetConstantCurve(endClip, smrPath, bsPrefix + tongueOutPropName, 100f);
@@ -7485,7 +7714,7 @@ namespace hinzka.FaceTracking.Editor
             // 山の頂点用の新規クリップ。tongueOut本体は0にする
             // (peakShapeName自体の頂点データにtongueOut本体の指定%ぶんが既に焼き込まれているため、
             // 生カーブも同時に駆動すると二重に伸びてしまう)。
-            var peakClip = new AnimationClip { name = "hinzkaUE_TonguePeak" };
+            var peakClip = new AnimationClip { name = "hinzkaNK_TonguePeak" };
             AssetDatabase.AddObjectToAsset(peakClip, fx);
             peakClip.hideFlags = GENERATED_SUBASSET_HIDE_FLAGS;
             SetConstantCurve(peakClip, smrPath, bsPrefix + tongueOutPropName, 0f);
@@ -7498,7 +7727,7 @@ namespace hinzka.FaceTracking.Editor
 
             AnimationClip MakeEnvelopePointClip(string suffix, float valuePercent)
             {
-                var clip = new AnimationClip { name = $"hinzkaUE_TongueEnvelope_{suffix}" };
+                var clip = new AnimationClip { name = $"hinzkaNK_TongueEnvelope_{suffix}" };
                 AssetDatabase.AddObjectToAsset(clip, fx);
                 clip.hideFlags = GENERATED_SUBASSET_HIDE_FLAGS;
                 SetConstantCurve(clip, smrPath, bsPrefix + tongueOutPropName, 0f);
@@ -7557,7 +7786,7 @@ namespace hinzka.FaceTracking.Editor
         }
 
         /// <summary>
-        /// TongueOutSteps_BT配下の専用クリップ(hinzkaUE_TongueStep_*)が存在する場合、
+        /// TongueOutSteps_BT配下の専用クリップ(hinzkaNK_TongueStep_*)が存在する場合、
         /// そのBlendShapeカーブをすべて0に固定して無効化する。ApplyTongueLiftEnvelopeによる
         /// 持ち上げエンベロープと、同じv2/TongueOutを駆動源とする段階シェイプ系が
         /// 二重に舌を動かしてしまうのを防ぐ。該当クリップが無ければ何もしない。
@@ -7618,6 +7847,64 @@ namespace hinzka.FaceTracking.Editor
             // 辿って元のBlendTree名を探すため確実に検出できる(BlendTreeContainsNamedDescendant参照)。
             if (disable2D) RemoveDirectBlendTreeChildByNameSuffix(fx, BLINK_2D_MOTION_NAME_SUFFIX);
             if (disable1D) RemoveDirectBlendTreeChildByNameSuffix(fx, BLINK_SIMPLE1D_MOTION_NAME_SUFFIX);
+        }
+
+        /// <summary>
+        /// 左右のまばたきを、片方の目のトラッキング値だけで同期させる。テンプレートFX内の
+        /// まばたき駆動BlendTree(Blink Simple 1D・Blink2D、配置方式や通常/WithBrow/Modulation
+        /// バリエーションを問わず全部)を名前で検索し、blendParameter(Blink2Dの場合は
+        /// blendParameterYも)を、指定した側の値へ揃える。
+        /// 対応するBlendTreeが見つからない(テンプレートがそもそも左右独立方式を持たない)場合は
+        /// 何もしない(安全にスキップする)。
+        /// </summary>
+        private static void ApplySyncBlinkLeftRightIfNeeded(AnimatorController fx, bool syncEnabled, bool useRightAsSource)
+        {
+            if (fx == null || !syncEnabled) return;
+            var fxPath = AssetDatabase.GetAssetPath(fx);
+            if (string.IsNullOrEmpty(fxPath)) return;
+
+            var allTrees = AssetDatabase.LoadAllAssetsAtPath(fxPath).OfType<BlendTree>().ToList();
+
+            // ── Blink Simple 1D ──
+            // "BlinkSimple1D_Left"を含む名前のBlendTree(通常/WithBrow/Mod問わず全バリエーション)の
+            // うち、代表として通常版(サフィックス無し)のblendParameterを採用元の値として使う。
+            var leftTrees = allTrees.Where(t => t.name.Contains("BlinkSimple1D_Left")).ToList();
+            var rightTrees = allTrees.Where(t => t.name.Contains("BlinkSimple1D_Right")).ToList();
+            if (leftTrees.Count > 0 && rightTrees.Count > 0)
+            {
+                var leftPlain = leftTrees.FirstOrDefault(t => !t.name.Contains("_WithBrow") && !t.name.Contains("_Mod")) ?? leftTrees[0];
+                var rightPlain = rightTrees.FirstOrDefault(t => !t.name.Contains("_WithBrow") && !t.name.Contains("_Mod")) ?? rightTrees[0];
+                var sourceParam = useRightAsSource ? rightPlain.blendParameter : leftPlain.blendParameter;
+
+                int patched = 0;
+                foreach (var t in leftTrees.Concat(rightTrees))
+                {
+                    if (t.blendParameter == sourceParam) continue;
+                    t.blendParameter = sourceParam;
+                    EditorUtility.SetDirty(t);
+                    patched++;
+                }
+                if (patched > 0)
+                    Debug.Log($"[hinzka ARKit FT] 左右まばたき同期: Blink Simple 1D系BlendTree{patched}個を" +
+                              $"'{sourceParam}'に揃えました。");
+            }
+
+            // ── Blink2D ──
+            // FreeformCartesian2Dで、名前に"Blink2D"を含むBlendTreeのX/Y軸を、指定した側の値に揃える。
+            var blink2DTrees = allTrees.Where(t =>
+                t.blendType == BlendTreeType.FreeformCartesian2D && t.name.Contains("Blink2D")).ToList();
+            int patched2D = 0;
+            foreach (var t in blink2DTrees)
+            {
+                var sourceParam2D = useRightAsSource ? t.blendParameterY : t.blendParameter;
+                if (t.blendParameter == sourceParam2D && t.blendParameterY == sourceParam2D) continue;
+                t.blendParameter = sourceParam2D;
+                t.blendParameterY = sourceParam2D;
+                EditorUtility.SetDirty(t);
+                patched2D++;
+            }
+            if (patched2D > 0)
+                Debug.Log($"[hinzka ARKit FT] 左右まばたき同期: Blink2D系BlendTree{patched2D}個のX/Y軸を揃えました。");
         }
 
         /// <summary>
@@ -7880,7 +8167,7 @@ namespace hinzka.FaceTracking.Editor
         private const string BLINK_EFFECT_STATE_NAME = "FTextra_EyeBlinkEffect";
         // FXジェネレータ側のComboRuleが自動生成するクリップの命名規則(UEFxGeneratorWindow準拠)。
         // このプレフィックスに一致するクリップだけを「安全に破棄してよい生成物」とみなす。
-        private const string BLINK_EFFECT_CLIP_PREFIX = "hinzkaUE_Combo_FTextra_EyeBlinkEffect";
+        private const string BLINK_EFFECT_CLIP_PREFIX = "hinzkaNK_Combo_FTextra_EyeBlinkEffect";
 
         /// <summary>
         /// まばたき検出時に1回だけ再生される「おまけ」のState(FTextra_EyeBlinkEffect)が
@@ -7903,7 +8190,7 @@ namespace hinzka.FaceTracking.Editor
             // 外部ファイル参照のままにせず、コピーをFXアセット内に埋め込む
             // (他のcombo/生成クリップと同様、FXを配布・共有しても参照が切れないようにするため)。
             var copy = UnityEngine.Object.Instantiate(userClip);
-            copy.name = "hinzkaUE_Combo_FTextra_EyeBlinkEffect_User";
+            copy.name = "hinzkaNK_Combo_FTextra_EyeBlinkEffect_User";
             AssetDatabase.AddObjectToAsset(copy, fx);
             HideGeneratedSubAsset(copy);
 
@@ -8147,7 +8434,7 @@ namespace hinzka.FaceTracking.Editor
                 Undo.RegisterCreatedObjectUndo(copy, "ARKit FT Install (Instantiate Avatar)");
             }
 
-            copy.name = source.name + "_ARKitFT";
+            copy.name = source.name + "_FT";
 
             // 元アバターが既にVRChatへアップロード済みの場合、PipelineManagerに
             // Blueprint IDが記録されている。複製先にこれをそのまま引き継ぐと、
@@ -8738,6 +9025,10 @@ namespace hinzka.FaceTracking.Editor
             foreach (var p in paramAsset.parameters)
             {
                 if (p == null || !p.networkSynced) continue;
+                // 名前が空(未設定)のエントリは、Expression Menuからもアニメーターからも
+                // 参照しようがない無効なスロットなので、bit消費として数えない。
+                // (VRM Converter for VRChat等が予約枠として残す空エントリで実際に発生する)
+                if (string.IsNullOrWhiteSpace(p.name)) continue;
                 switch (p.valueType)
                 {
                     case VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters.ValueType.Bool:
@@ -8748,6 +9039,23 @@ namespace hinzka.FaceTracking.Editor
                 }
             }
             return bits;
+        }
+
+        /// <summary>
+        /// ComputeVrcParameterBitsと同じフィルタ条件(networkSynced かつ 名前が空でない)で、
+        /// 該当パラメータの「個数」を数える。bit数とあわせてUIに表示するために使う。
+        /// </summary>
+        private static int CountVrcSyncedParameters(VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionParameters paramAsset)
+        {
+            if (paramAsset?.parameters == null) return 0;
+            int count = 0;
+            foreach (var p in paramAsset.parameters)
+            {
+                if (p == null || !p.networkSynced) continue;
+                if (string.IsNullOrWhiteSpace(p.name)) continue;
+                count++;
+            }
+            return count;
         }
 
         private static bool IsValidAssetsFolder(string path)
@@ -8782,7 +9090,7 @@ namespace hinzka.FaceTracking.Editor
         private static string CreateUniqueInstallOutputFolder(string baseFolder, string avatarName)
         {
             EnsureAssetFolder(baseFolder);
-            string safeName = SanitizeAssetName(string.IsNullOrWhiteSpace(avatarName) ? "Avatar_ARKitFT" : avatarName);
+            string safeName = SanitizeAssetName(string.IsNullOrWhiteSpace(avatarName) ? "Avatar_FT" : avatarName);
             string desired = baseFolder.TrimEnd('/') + "/" + safeName;
             string unique = AssetDatabase.GenerateUniqueAssetPath(desired);
 
@@ -8802,7 +9110,7 @@ namespace hinzka.FaceTracking.Editor
             var invalid = Path.GetInvalidFileNameChars();
             var chars = name.Select(c => invalid.Contains(c) || c == '/' || c == '\\' ? '_' : c).ToArray();
             var result = new string(chars).Trim();
-            return string.IsNullOrEmpty(result) ? "Avatar_ARKitFT" : result;
+            return string.IsNullOrEmpty(result) ? "Avatar_FT" : result;
         }
 
         /// <summary>
@@ -8897,6 +9205,109 @@ namespace hinzka.FaceTracking.Editor
                           "Assetsフォルダ内に配置されているか、ファイル名が完全に一致しているかご確認ください。");
             }
 
+            return null;
+        }
+
+        /// <summary>
+        /// テンプレートセット1件分の情報(発見結果)。UIでの選択・Profileへの保存に使う。
+        /// </summary>
+        private sealed class TemplateSetOption
+        {
+            public string folderPath;   // 例: "Assets/.../Templates/軽量版" (ArkitTemplateSetInfoアセットが置かれているフォルダ)
+            public string displayName;  // ArkitTemplateSetInfo.displayNameが空ならフォルダ名を使う
+            public string description;
+        }
+
+        /// <summary>
+        /// プロジェクト内から、ArkitTemplateSetInfoアセットが置かれている全フォルダを
+        /// テンプレートセットとして発見する。1つも見つからない場合は空リストを返す
+        /// (この場合、後方互換としてプロジェクト全体からの名前検索にフォールバックする)。
+        /// </summary>
+        private static List<TemplateSetOption> DiscoverTemplateSets()
+        {
+            var result = new List<TemplateSetOption>();
+            var guids = AssetDatabase.FindAssets("t:ArkitTemplateSetInfo");
+            foreach (var guid in guids)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var info = AssetDatabase.LoadAssetAtPath<ArkitTemplateSetInfo>(path);
+                if (info == null) continue;
+
+                string folderPath = Path.GetDirectoryName(path)?.Replace('\\', '/');
+                if (string.IsNullOrEmpty(folderPath)) continue;
+
+                string displayName = !string.IsNullOrWhiteSpace(info.displayName)
+                    ? info.displayName
+                    : Path.GetFileName(folderPath);
+
+                result.Add(new TemplateSetOption
+                {
+                    folderPath = folderPath,
+                    displayName = displayName,
+                    description = info.description ?? ""
+                });
+            }
+            return result.OrderBy(e => e.displayName, StringComparer.Ordinal).ToList();
+        }
+
+        /// <summary>
+        /// 指定したフォルダ直下から、ファイル名を指定してテンプレートアセットを読み込む。
+        /// FindTemplate(プロジェクト全体からの名前検索)と異なり、フォルダを固定して探すため、
+        /// 同名ファイルがプロジェクト内に複数存在していても、意図しない方を拾う心配が無い。
+        ///
+        /// 決め打ち名(fileName)で完全一致するファイルがあれば最優先でそれを使う(後方互換)。
+        /// 見つからない場合、フォルダ直下でfileNameの拡張子抜きの文字列(例: "NK_FT_Template")を
+        /// **ファイル名に含む**、かつ型がTに一致するアセットを探す(ユーザーがファイル名を
+        /// 分かりやすく変えても認識できるようにするため。例: "NK_FT_Template_軽量版.controller"等)。
+        /// 該当が1件だけならそれを自動採用し、0件または2件以上の場合はnullを返す
+        /// (2件以上の場合は、どれを使うべきか一意に決められないため、安全側に倒して不採用とする)。
+        /// </summary>
+        private static T FindTemplateInFolder<T>(string folderPath, string fileName) where T : UnityEngine.Object
+        {
+            if (string.IsNullOrEmpty(folderPath)) return null;
+
+            // ① 決め打ち名との完全一致(最優先・後方互換)
+            string exactPath = folderPath.TrimEnd('/') + "/" + fileName;
+            var exactAsset = AssetDatabase.LoadAssetAtPath<T>(exactPath);
+            if (exactAsset != null) return exactAsset;
+
+            // ② 部分一致によるフォールバック: フォルダ直下(サブフォルダは含めない)で、
+            // ファイル名にコア文字列(拡張子抜きのfileName)を含み、型がTに一致するものを探す。
+            string coreToken = Path.GetFileNameWithoutExtension(fileName);
+            var guids = AssetDatabase.FindAssets($"t:{typeof(T).Name}", new[] { folderPath.TrimEnd('/') });
+            var candidates = new List<(string path, T asset)>();
+            foreach (var guid in guids)
+            {
+                var candidatePath = AssetDatabase.GUIDToAssetPath(guid);
+                // FindAssetsはサブフォルダも再帰的に検索するため、直下のファイルだけに絞る。
+                if (Path.GetDirectoryName(candidatePath)?.Replace('\\', '/') != folderPath.TrimEnd('/')) continue;
+
+                string candidateName = Path.GetFileNameWithoutExtension(candidatePath);
+                if (candidateName.IndexOf(coreToken, StringComparison.OrdinalIgnoreCase) < 0) continue;
+
+                var candidateAsset = AssetDatabase.LoadAssetAtPath<T>(candidatePath);
+                if (candidateAsset != null) candidates.Add((candidatePath, candidateAsset));
+            }
+
+            if (candidates.Count == 1)
+            {
+                Debug.Log($"[hinzka ARKit FT] '{exactPath}' が見つからなかったため、名前に" +
+                          $"'{coreToken}'を含む'{candidates[0].path}'を自動的に採用しました。");
+                return candidates[0].asset;
+            }
+
+            if (candidates.Count > 1)
+            {
+                var names = string.Join(", ", candidates.Select(c => c.path));
+                Debug.LogWarning($"[hinzka ARKit FT] '{folderPath}'内で、名前に'{coreToken}'を含む" +
+                                  $"{typeof(T).Name}が{candidates.Count}件見つかり、どれを使うべきか" +
+                                  $"一意に決められませんでした({names})。いずれか1つのファイル名を" +
+                                  $"'{fileName}'に変更するか、それ以外を別の場所へ移動してください。");
+                return null;
+            }
+
+            Debug.Log($"[hinzka ARKit FT] '{exactPath}' が見つからず、名前に'{coreToken}'を含む" +
+                      $"{typeof(T).Name}も見つかりませんでした。");
             return null;
         }
     }

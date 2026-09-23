@@ -161,6 +161,88 @@ namespace hinzka.FaceTracking.DevTools
         }
 
         /// <summary>
+        /// rest→target姿勢の間をstageCount段階に分けてSlerpし、各段階の頂点/法線差分を
+        /// weight昇順のBlendShapeFrameとして返す。
+        ///
+        /// 単純に0%(rest)と100%(target)の2点だけでBlendShapeFrameを作ると、Unity側はその間を
+        /// 頂点の直線補間(弦)で埋める。回転角が小さいうちは弧と弦の差はごくわずかだが、
+        /// 回転角が大きいシェイプ(デフォルメアバター等で可動域が大きいケース)ほど弦は弧から
+        /// 内側に大きく食い込み、ウェイト中間域でメッシュが実際の回転軌跡を通らず凹む/潰れて
+        /// 見える原因になる。Quaternion.Slerpで実際に中間姿勢をベイクし、複数フレーム化する
+        /// (区分線形近似)ことでこの乖離を軽減する。stageCount=1なら従来通り単一フレームになる。
+        /// </summary>
+        /// <param name="applyPose">
+        /// (leftLocalRot, rightLocalRot) を受け取り、実際にボーン(および必要ならコンストレイント
+        /// ターゲット)へ姿勢を適用するコールバック。呼び出し側の既存ApplyPose相当のロジックを渡す。
+        /// </param>
+        /// <param name="anyDeltaOverall">
+        /// いずれかの段階で頂点差分が検出された(ほぼゼロではなかった)場合にtrue。
+        /// </param>
+        private static List<ShapeFrameData> BakeStagedShapeFrames(
+            SkinnedMeshRenderer targetSmr,
+            Vector3[] baseVerts, Vector3[] baseNormals,
+            Quaternion leftRest, Quaternion rightRest,
+            EyeSide side, Quaternion targetRot,
+            System.Action<Quaternion, Quaternion> applyPose,
+            string outName, float frameWeight, int stageCount,
+            List<Mesh> cleanupList,
+            out bool anyDeltaOverall)
+        {
+            var frames = new List<ShapeFrameData>();
+            anyDeltaOverall = false;
+            if (stageCount < 1) stageCount = 1;
+
+            var restRot = side == EyeSide.Left ? leftRest : rightRest;
+
+            for (int stage = 1; stage <= stageCount; stage++)
+            {
+                float t = (float)stage / stageCount;
+                var midRot = Quaternion.Slerp(restRot, targetRot, t);
+
+                applyPose(
+                    side == EyeSide.Left ? midRot : leftRest,
+                    side == EyeSide.Right ? midRot : rightRest);
+
+                var posed = new Mesh();
+                Physics.SyncTransforms();
+                targetSmr.BakeMesh(posed, true);
+                cleanupList.Add(posed);
+
+                var pv = posed.vertices;
+                var pn = posed.normals;
+                if (pv.Length != baseVerts.Length)
+                {
+                    Debug.LogError($"[EyeLookBaker] 頂点数不一致のため '{outName}' (stage {stage}/{stageCount}) を" +
+                                    "スキップしました。");
+                    continue;
+                }
+
+                var dv = new Vector3[pv.Length];
+                var dn = new Vector3[pv.Length];
+                var dt = new Vector3[pv.Length];
+                bool anyDelta = false;
+                for (int i = 0; i < pv.Length; i++)
+                {
+                    dv[i] = pv[i] - baseVerts[i];
+                    dn[i] = pn[i] - baseNormals[i];
+                    if (!anyDelta && dv[i].sqrMagnitude > 1e-12f) anyDelta = true;
+                }
+                if (anyDelta) anyDeltaOverall = true;
+
+                frames.Add(new ShapeFrameData
+                {
+                    name = outName,
+                    weight = frameWeight * t,
+                    dv = dv,
+                    dn = dn,
+                    dt = dt
+                });
+            }
+
+            return frames;
+        }
+
+        /// <summary>
         /// eyeLook系8シェイプキーを生成する。
         /// </summary>
         /// <param name="workingMesh">
@@ -179,7 +261,8 @@ namespace hinzka.FaceTracking.DevTools
             string outputFolderIfCreating = "Assets/_Generated/BakedMeshes",
             float frameWeight = 100f,
             bool overwriteExistingShapes = true,
-            string namePrefix = DefaultBonePrefix)
+            string namePrefix = DefaultBonePrefix,
+            int stageCount = 1)
         {
             var err = Validate(avatarDescriptor, targetSmr);
             if (err != null)
@@ -239,40 +322,23 @@ namespace hinzka.FaceTracking.DevTools
                         continue;
                     }
 
-                    leftEye.localRotation = leftRest;
-                    rightEye.localRotation = rightRest;
-
                     var rot = GetTargetRotation(eyeSettings, spec);
-                    if (spec.side == EyeSide.Left) leftEye.localRotation = rot;
-                    else rightEye.localRotation = rot;
 
-                    var posedMesh = new Mesh();
-                    Physics.SyncTransforms();
-                    targetSmr.BakeMesh(posedMesh, true);
-                    posedMeshesToCleanup.Add(posedMesh);
-
-                    var posedVerts = posedMesh.vertices;
-                    var posedNormals = posedMesh.normals;
-
-                    if (posedVerts.Length != baseVerts.Length)
+                    void ApplyPoseSimple(Quaternion l, Quaternion r)
                     {
-                        Debug.LogError($"[EyeLookBaker] 頂点数不一致のため '{outName}' をスキップしました。" +
-                                        $"(base={baseVerts.Length}, posed={posedVerts.Length})");
-                        continue;
+                        leftEye.localRotation = l;
+                        rightEye.localRotation = r;
                     }
 
-                    var dv = new Vector3[posedVerts.Length];
-                    var dn = new Vector3[posedVerts.Length];
-                    var dt = new Vector3[posedVerts.Length];
+                    var frames = BakeStagedShapeFrames(
+                        targetSmr, baseVerts, baseNormals, leftRest, rightRest,
+                        spec.side, rot, ApplyPoseSimple, outName, frameWeight, stageCount,
+                        posedMeshesToCleanup, out _);
 
-                    for (int i = 0; i < posedVerts.Length; i++)
-                    {
-                        dv[i] = posedVerts[i] - baseVerts[i];
-                        dn[i] = posedNormals[i] - baseNormals[i];
-                    }
+                    if (frames.Count == 0) continue; // 頂点数不一致等で全段階スキップされた場合
 
                     savedShapes.RemoveAll(s => s.name == outName);
-                    newShapes.Add(new ShapeFrameData { name = outName, weight = frameWeight, dv = dv, dn = dn, dt = dt });
+                    newShapes.AddRange(frames);
                 }
 
                 editableMesh.ClearBlendShapes();
@@ -320,11 +386,12 @@ namespace hinzka.FaceTracking.DevTools
             float frameWeight = 100f,
             string namePrefix = DefaultBonePrefix,
             Transform leftConstraintTarget = null,
-            Transform rightConstraintTarget = null)
+            Transform rightConstraintTarget = null,
+            int stageCount = 1)
         {
             return GenerateMissingShapesAdditive(
                 avatarDescriptor, targetSmr, workingMesh, frameWeight, namePrefix,
-                leftConstraintTarget, rightConstraintTarget, out _);
+                leftConstraintTarget, rightConstraintTarget, out _, stageCount);
         }
 
         /// <summary>
@@ -348,7 +415,8 @@ namespace hinzka.FaceTracking.DevTools
             string namePrefix,
             Transform leftConstraintTarget,
             Transform rightConstraintTarget,
-            out List<string> emptyDeltaNames)
+            out List<string> emptyDeltaNames,
+            int stageCount = 1)
         {
             var added = new List<string>();
             emptyDeltaNames = new List<string>();
@@ -412,33 +480,13 @@ namespace hinzka.FaceTracking.DevTools
                         continue; // 既存はスキップ(上書きしない)
 
                     var rot = GetTargetRotation(eyeSettings, spec);
-                    ApplyPose(
-                        spec.side == EyeSide.Left ? rot : leftRest,
-                        spec.side == EyeSide.Right ? rot : rightRest);
 
-                    var posed = new Mesh();
-                    Physics.SyncTransforms();
-                    targetSmr.BakeMesh(posed, true);
-                    posedCleanup.Add(posed);
+                    var frames = BakeStagedShapeFrames(
+                        targetSmr, baseVerts, baseNormals, leftRest, rightRest,
+                        spec.side, rot, ApplyPose, outName, frameWeight, stageCount,
+                        posedCleanup, out bool anyDelta);
 
-                    var pv = posed.vertices;
-                    var pn = posed.normals;
-                    if (pv.Length != baseVerts.Length)
-                    {
-                        Debug.LogError($"[EyeLookBaker] 頂点数不一致のため '{outName}' をスキップしました。");
-                        continue;
-                    }
-
-                    var dv = new Vector3[pv.Length];
-                    var dn = new Vector3[pv.Length];
-                    var dt = new Vector3[pv.Length];
-                    bool anyDelta = false;
-                    for (int i = 0; i < pv.Length; i++)
-                    {
-                        dv[i] = pv[i] - baseVerts[i];
-                        dn[i] = pn[i] - baseNormals[i];
-                        if (!anyDelta && dv[i].sqrMagnitude > 1e-12f) anyDelta = true;
-                    }
+                    if (frames.Count == 0) continue; // 頂点数不一致等で全段階スキップされた場合
 
                     if (!anyDelta)
                     {
@@ -449,7 +497,8 @@ namespace hinzka.FaceTracking.DevTools
                             "(Face SMRと眼球メッシュが別々のSkinnedMeshRendererになっていないか確認してください)。");
                     }
 
-                    workingMesh.AddBlendShapeFrame(outName, frameWeight, dv, dn, dt);
+                    foreach (var f in frames)
+                        workingMesh.AddBlendShapeFrame(f.name, f.weight, f.dv, f.dn, f.dt);
                     added.Add(outName);
                 }
 

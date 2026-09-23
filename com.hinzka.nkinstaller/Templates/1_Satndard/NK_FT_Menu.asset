@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
-  m_Name: ARKit_FT_Menu
+  m_Name: NK_FT_Menu
   m_EditorClassIdentifier: 
   Parameters: {fileID: 11400000, guid: cb6928475baf74342be9337b60cd3d2b, type: 2}
   controls:

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2ffd1781c45fa46bfa17bc55c6e216, type: 3}
+  m_Name: ARKitFTProfile_Mie
+  m_EditorClassIdentifier: 
+  avatarMatchTag: Mie
+  shopName: Kaiiiiiiiii / kai 9
+  versionName: Ver1.03
+  templateSetFolderPath: Assets/hinzka_FaceTracking/ARKitInstaller/Templates/4_Compact_All3bit+EyeCross
+  faceSMRPath: Body
+  arkitShapePrefix: 
+  ueFallbackEnabled: 1
+  disableSyncForEmptyShapes: 0
+  leftEyeConstraintPath: 
+  rightEyeConstraintPath: 
+  eyeSmrSeparate: 0
+  eyeSMRPath: 
+  squintShapeNames:
+  - Eye_Close2
+  useEyeLookBakeShapes: 0
+  eyeLookBakeShapeNames: []
+  gestureLayerIndices: 08000000090000000a000000
+  gestureLayerNames:
+  - '[ USER EDIT ] FACE EMOTE PLAYER'
+  - '[ USER EDIT ] FACE EMOTE OVERRIDE'
+  - BLINK
+  generateVisemeCompensation: 1
+  visemeScale: 1
+  generateEyeLookShapes: 1
+  eyeLookIntensity: 1
+  eyeLookStageCount: 3
+  disableNativeEyeLook: 1
+  blinkControlMode: 0
+  generateBrowAssistShapes: 0
+  browAssistIntensity: 0.2
+  generateTongueAssistShapes: 1
+  tongueLiftSource: 1
+  tongueExistingLiftShapeName: TongueUp
+  tongueExistingLiftShapeWeight: 50
+  tongueMoveAmount: 0.01
+  tongueLiftAxis: 2
+  tongueDetectThresholdMm: 1
+  tongueLipExcludeThresholdMm: 0.5
+  tongueExcludeTeethFromPrimary: 0
+  tongueUnitOverride: 0
+  showTonguePreview: 0
+  tonguePreviewPointScale: 0.08
+  addBlinkEffect: 0
+  blinkEffectClip: {fileID: 0}
+  outputFolder: Assets/NK_Installer_Generated
