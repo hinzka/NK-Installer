@@ -6,10 +6,10 @@
   "packages": {
     "com.hinzka.nkinstaller": {
       "versions": {
-        "1.2.1": {
+        "1.2.2": {
           "name": "com.hinzka.nkinstaller",
           "displayName": "NK Installer - Native Key FaceTracking Installer",
-          "version": "1.2.1",
+          "version": "1.2.2",
           "unity": "2022.3",
           "description": "アバター作者がつくった表情で、そのままフェイストラッキング。ARKit標準シェイプキーを非破壊で活用するVRCFaceTracking導入ツールです。",
           "author": {
@@ -33,11 +33,16 @@
             "Packages/com.hinzka.nkinstaller/hinzka_FaceTracking": null,
             "Packages/com.hinzka.nkinstaller/NK Installer": null
           },
-          "legacyFiles": {},
+          "legacyFiles": {
+            "Packages/com.hinzka.nkinstaller/Templates/ARKit_FT_Menu.asset": "",
+            "Packages/com.hinzka.nkinstaller/Templates/ARKit_FT_Parameters.asset": "",
+            "Packages/com.hinzka.nkinstaller/Templates/ARKit_FT_ShapeParamMap.asset": "",
+            "Packages/com.hinzka.nkinstaller/Templates/ARKit_FT_Template.controller": ""
+          },
           "changelogUrl": "https://example.com/nk-installer/CHANGELOG.md",
           "documentationUrl": "https://example.com/nk-installer/docs",
-          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.2.1/com.hinzka.nkinstaller-1.2.1.zip",
-          "zipSHA256": "50639a9da049275175b7ecd1c94571097d91c33ccebf4ccf274384f85df73d5e"
+          "url": "https://github.com/hinzka/NK-Installer/releases/download/v1.2.2/com.hinzka.nkinstaller-1.2.2.zip",
+          "zipSHA256": "9d77da7973ec78e53566ed3d6b0852e00de3203de1ad0025c79ed2bc57b9a286"
         }
       }
     }
