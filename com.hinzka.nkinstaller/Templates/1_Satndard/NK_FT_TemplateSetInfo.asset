@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143eb96980c3ce4499f6a76be4de1dc8, type: 3}
   m_Name: NK_FT_TemplateSetInfo
   m_EditorClassIdentifier: 
-  displayName: 1_Basic:141bit
-  description: "\u57FA\u672C\u8A2D\u5B9A\n\u6BD4\u8F03\u7528\u306E\u57FA\u6E96\u30BB\u30C3\u30C8"
+  displayName: 1_Standard
+  description: Recommended version

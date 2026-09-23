@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143eb96980c3ce4499f6a76be4de1dc8, type: 3}
   m_Name: NK_FT_TemplateSetInfo
   m_EditorClassIdentifier: 
-  displayName: 3_Basic+EyeCross
-  description: "balanced+\u5BC4\u308A\u76EE\u304C\u3067\u304D\u308B\u30BB\u30C3\u30C8"
+  displayName: 3_Standard+Cross-Eyed
+  description: Adds a cross-eyed expression

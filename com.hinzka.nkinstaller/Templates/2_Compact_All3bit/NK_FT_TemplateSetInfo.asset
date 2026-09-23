@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NK_FT_TemplateSetInfo
   m_EditorClassIdentifier: 
   displayName: 2_Compact All3bit
-  description: "3bit\u5206\u5272\n\u6700\u4F4E\u9650"
+  description: Saves synced parameter memory

@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143eb96980c3ce4499f6a76be4de1dc8, type: 3}
   m_Name: NK_FT_TemplateSetInfo
   m_EditorClassIdentifier: 
-  displayName: 6_Compact All3bit+EyeCross
-  description: "3bit\u5206\u5272+\u5BC4\u308A\u76EE\n\u6700\u4F4E\u9650"
+  displayName: 6_Compact All3bit+Cross-Eyed
+  description: 'Saves synced parameter memory
+
+    Adds a cross-eyed expression
+
+'
